@@ -1,3 +1,13 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "code": 80,
+        "ignoreComments": true, // You might want to ignore comments
+        "ignoreUrls": true // You might want to ignore URLs
+      }
+    ]
+  }
 }
