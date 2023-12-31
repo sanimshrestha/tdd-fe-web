@@ -40,12 +40,12 @@ const DrinkMaker = (props: DrinkMakerProps) => {
 
   return (
     <div className="w-auto relative">
-      {glass && <Glass {...glass} />}
       {ingredients && glass &&
         <DrinkStack
           ingredients={ingredients}
           glass={glass} />
       }
+      {glass && <Glass {...glass} />}
     </div>
   )
 };

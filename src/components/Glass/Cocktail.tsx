@@ -5,7 +5,7 @@ const Cocktail = (props: GlassProps) => {
   const { strokeColor = "white", strokeWidth = 2 } = props;
 
   return (
-    <div>
+    <div className="relative pointer-events-none">
 
       {/* clip path from svg for masking the drink stack */}
       <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg"
