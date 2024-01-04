@@ -7,11 +7,10 @@ import {
 import Glass from "../Glass";
 
 interface DrinkMakerProps {
-  drinkId: number;
+  drink: DrinkType;
 }
 
-const getData = (drinkId: number) => {
-  const drink = drinks.find((d) => d.id === drinkId);
+const getData = (drink: DrinkType) => {
   if (!drink) return null;
 
   const glassId = drink.glass;
@@ -31,19 +30,21 @@ const getData = (drinkId: number) => {
   const filteredIngredients = ingredients
     .filter(Boolean) as IngredientsWithAmount[];
 
-  return { glass, ingredients: filteredIngredients };
+  return { drink, glass, ingredients: filteredIngredients };
 }
 
 const DrinkMaker = (props: DrinkMakerProps) => {
-  const { drinkId } = props;
-  const { glass, ingredients } = getData(drinkId) || {};
+  const { drink } = props;
+  const { glass, ingredients } = getData(drink) || {};
 
   return (
-    <div className="w-auto relative">
+    <div className="w-auto relative max-w-[250px]">
       {ingredients && glass &&
-        <DrinkStack
-          ingredients={ingredients}
-          glass={glass} />
+        <>
+          <DrinkStack
+            ingredients={ingredients}
+            glass={glass} />
+        </>
       }
       {glass && <Glass {...glass} />}
     </div>
