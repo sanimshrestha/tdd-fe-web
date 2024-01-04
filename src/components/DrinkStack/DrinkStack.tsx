@@ -10,75 +10,72 @@ interface DrinkStackProps {
 
 const DrinkStack = (props: DrinkStackProps) => {
   const { ingredients, glass } = props;
-  const [animationVariant, setanimationVariant] = useState<string>('hidden');
+
+  const totalIngredientAmt = ingredients.reduce((acc, curr) => {
+    return acc + curr.amount;
+  }, 0);
+
+  const adjustedIngredients = ingredients.map((ingredient) => {
+    return {
+      ...ingredient,
+      amount: (ingredient.amount / totalIngredientAmt) * (100 - glass.padding)
+    }
+  });
 
   // Framer motion variants for the drinks stack
   const container = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const item = {
     hidden: {
-      height: 0,
+      clipPath: 'inset(100% 0 0 0)'
     },
     show: {
-      height: '100%',
+      clipPath: 'inset(0 0 0 0)',
       transition: {
         ease: "easeInOut",
-        duration: 0.06,
-      }
-    }
-  }
-
-  // Mouse Events
-  const handleClick = () => {
-    // Toggle between 'hidden' and 'show'
-    setanimationVariant((prevVariant) =>
-      prevVariant === 'hidden' ? 'show' : 'hidden'
-    );
+        duration: 0.5
+      },
+    },
   };
 
   const getStack = () => {
     return (
       <motion.div
-        className="absolute top-0 flex flex-col-reverse w-full h-full"
+        className="absolute top-0 w-full"
         variants={container}
         initial="hidden"
-        animate={animationVariant}
-        onClick={handleClick}
-        style={{
-          clipPath: "url(#mask)",
-          height: `calc(${glass.maskRatio}% - 
-                  ${2 * (glass.gap + glass.strokeWidth)}px)`,
-          width: `calc(100% - ${2 * (glass.gap + glass.strokeWidth)}px)`,
-          left: `${2 * glass.strokeWidth}px`,
-          top: `${2 * glass.strokeWidth}px`,
-          gap: `${glass.gap}px`,
-        }} >
-        {ingredients.map((ingredient) => (
-          <div
-            key={ingredient.id}
-            className="bg-transparent relative"
-            style={{
-              height: ingredient.amount + "%"
-            }}
-            title={ingredient.name}>
-            <motion.div
-              className="absolute bottom-0 left-0 w-full "
+        animate="show"
+        style={{ height: glass.maskRatio + "%", }}
+      >
+        <div className="relative flex flex-col-reverse"
+          style={{
+            clipPath: "url(#mask)",
+            left: `${2 * glass.strokeWidth}px`,
+            top: `${2 * glass.strokeWidth}px`,
+            gap: `${glass.gap}px`,
+            height: `calc(100% - ${2 * (glass.gap + glass.strokeWidth)}px)`,
+            width: `calc(100% - ${2 * (glass.gap + glass.strokeWidth)}px)`,
+          }}
+        >
+          {adjustedIngredients.map((ingredient) => (
+            <div
+              key={ingredient.id}
+              className="bg-transparent relative"
               style={{
-                backgroundColor: ingredient.color,
+                height: ingredient.amount + "%"
               }}
-              variants={item}
-            />
-          </div >
-        ))
-        }
+              title={ingredient.name}>
+              <div
+                className="absolute bottom-0 left-0 w-full h-full"
+                style={{
+                  backgroundColor: ingredient.color,
+                }}
+              />
+            </div >
+          ))
+          }
+        </div>
+
       </motion.div>
+
     )
   }
 
@@ -90,7 +87,7 @@ const DrinkStack = (props: DrinkStackProps) => {
       {/* The glow div applying backdropFilter to previous div block */}
       <div
         className="absolute bottom-0 left-0 pointer-events-none 
-                    opacity-30 scale-150"
+                    opacity-40 scale-150"
         style={{
           height: `calc(${glass.maskRatio}% - 
                     ${2 * (glass.gap + glass.strokeWidth)}px)`,
