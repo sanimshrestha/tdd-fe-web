@@ -36,10 +36,10 @@ const DrinkStack = (props: DrinkStackProps) => {
     },
   };
 
-  const getStack = () => {
+  const getStack = (isBackground = false) => {
     return (
       <motion.div
-        className="absolute top-0 w-full"
+        className={`absolute top-0 w-full ${isBackground ? "" : "z-10"}`}
         variants={container}
         initial="hidden"
         animate="show"
@@ -83,18 +83,19 @@ const DrinkStack = (props: DrinkStackProps) => {
   return (
     <>
       {/* duplicate the drink stack for the background for glow effect */}
-      {getStack()}
+      {getStack(true)}
       {/* The glow div applying backdropFilter to previous div block */}
       <div
         className="absolute bottom-0 left-0 pointer-events-none 
-                    opacity-40 scale-150"
+                    opacity-40 -translate-x-1/2 scale-150"
         style={{
           height: `calc(${glass.maskRatio}% - 
                     ${2 * (glass.gap + glass.strokeWidth)}px)`,
-          width: `calc(100% - ${2 * (glass.gap + glass.strokeWidth)}px)`,
+          // width: `calc(100% - ${2 * (glass.gap + glass.strokeWidth)}px)`,
+          width: '100vw',
           left: `${2 * glass.strokeWidth}px`,
           top: `${2 * glass.strokeWidth}px`,
-          backdropFilter: "blur(20px) brightness(1.1)"
+          backdropFilter: "blur(20px) brightness(1.1)",
         }}>
       </div>
       {/* Actual drink stack to display */}

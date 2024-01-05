@@ -1,10 +1,13 @@
 import React, { use, useEffect, useState } from "react";
 import DrinkStack from "../DrinkStack/DrinkStack";
 import {
-  DrinkType, GlassType, drinks, glasses,
-  allingredients, IngredientsWithAmount
+  DrinkType, glasses,
+  allingredients, IngredientsWithAmount, accessories,
+  AccessoryWithPosition, garnishings
 } from "../../lib/mockdata";
 import Glass from "../Glass";
+import Accessory from "../Accessory";
+import Garnishing from "../Garnishing";
 
 interface DrinkMakerProps {
   drink: DrinkType;
@@ -16,6 +19,18 @@ const getData = (drink: DrinkType) => {
   const glassId = drink.glass;
   const glass = glasses.find((g) => g.id === glassId);
   if (!glass) return null;
+
+  const accessoryId = drink.accessory?.id;
+  let accessory;
+  if (accessoryId) {
+    accessory = accessories.find((a) => a.id === accessoryId);
+    accessory = accessory
+      ? { ...accessory, ...drink.accessory } as AccessoryWithPosition
+      : null;
+  }
+
+  const garnishingId = drink.garnishing;
+  const garnishing = garnishings.find((g) => g.id === garnishingId);
 
   const ingredientsTemp = drink.ingredients;
   if (!ingredientsTemp) return null;
@@ -30,15 +45,23 @@ const getData = (drink: DrinkType) => {
   const filteredIngredients = ingredients
     .filter(Boolean) as IngredientsWithAmount[];
 
-  return { drink, glass, ingredients: filteredIngredients };
+  return {
+    drink, glass, accessory, garnishing,
+    ingredients: filteredIngredients
+  };
 }
 
 const DrinkMaker = (props: DrinkMakerProps) => {
   const { drink } = props;
-  const { glass, ingredients } = getData(drink) || {};
+  const { glass, accessory, garnishing, ingredients } = getData(drink) || {};
 
   return (
-    <div className="w-auto relative max-w-[250px]">
+    // <div className="w-auto relative max-w-[250px]">
+    <div className="w-auto relative"
+      style={{
+        maxWidth: 'min(250px,20vh)',
+      }}
+    >
       {ingredients && glass &&
         <>
           <DrinkStack
@@ -46,8 +69,11 @@ const DrinkMaker = (props: DrinkMakerProps) => {
             glass={glass} />
         </>
       }
+      {accessory && <Accessory {...accessory} />}
       {glass && <Glass {...glass} />}
-    </div>
+      {garnishing && <Garnishing {...garnishing} />}
+
+    </div >
   )
 };
 
