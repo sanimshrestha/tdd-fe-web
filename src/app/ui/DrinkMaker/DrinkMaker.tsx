@@ -3,7 +3,7 @@ import DrinkStack from "../DrinkStack/DrinkStack";
 import {
   DrinkType, GlassType, drinks, glasses,
   allingredients, IngredientsWithAmount
-} from "./../../utils/mockdata";
+} from "../../lib/mockdata";
 import Glass from "../Glass";
 
 interface DrinkMakerProps {

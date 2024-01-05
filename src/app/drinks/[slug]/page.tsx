@@ -1,8 +1,8 @@
 import {
   DrinkType, IngredientsWithAmount,
   drinks, allingredients
-} from "./../../../utils/mockdata";
-import DrinkMaker from "@/components/DrinkMaker/DrinkMaker";
+} from "../../lib/mockdata";
+import DrinkMaker from "@/app/ui/DrinkMaker/DrinkMaker";
 import IngredientFooter from "./IngredientFooter";
 
 

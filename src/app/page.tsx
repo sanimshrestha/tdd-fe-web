@@ -1,4 +1,4 @@
-import { constants } from '@/utils/constants'
+import { constants } from '@/app/lib/constants'
 import Image from 'next/image'
 
 export default function Home() {
