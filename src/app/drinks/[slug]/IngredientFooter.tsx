@@ -1,5 +1,5 @@
 'use client';
-import { DrinkType, IngredientsWithAmount } from "@/utils/mockdata";
+import { DrinkType, IngredientsWithAmount } from "@/app/lib/mockdata";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 

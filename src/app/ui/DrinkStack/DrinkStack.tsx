@@ -1,5 +1,5 @@
 'use client';
-import { GlassType, IngredientsWithAmount } from "@/utils/mockdata";
+import { GlassType, IngredientsWithAmount } from "@/app/lib/mockdata";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
