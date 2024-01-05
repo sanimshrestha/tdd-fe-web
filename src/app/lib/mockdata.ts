@@ -16,6 +16,12 @@ export type DrinkType = {
   category: string;
   method: string;
   glass: number;
+  accessory?: {
+    id: number;
+    top: string;
+    left: string;
+  };
+  garnishing?: number;
   ingredientUnitAmt: number;
   ingredients: {id: number, 
                 amount: number;
@@ -32,6 +38,31 @@ export type GlassType = {
   maskRatio: number;
   padding: number;
 }
+
+export type AccessoryType = {
+  id: number;
+  name: string;
+  slug: string;
+  strokeColor: string;
+  strokeWidth: number;
+  fill: string;
+}
+
+export type AccessoryWithPosition = AccessoryType 
+                                    & { top: string, left: string };
+
+export type GarnishingType = {
+  id: number;
+  name: string;
+  slug: string;
+  strokeColor: string;
+  strokeWidth: number;
+  fill: string;
+}
+                                    
+// export type AccessoryWithPosition = AccessoryType 
+//                                       & { top: string, left: string };
+
 
 
 export const drinks:DrinkType[] = [
@@ -91,6 +122,39 @@ export const drinks:DrinkType[] = [
         unit: "ml"
       }
     ],
+  },
+  {
+    id: 3,
+    name: "Pina Colada",
+    slug: "pina-colada",
+    category: "Contemporary Classic - Blueprint",
+    method: "Blend",
+    glass:  2,
+    accessory: {
+      id: 1,
+      top: "-23.1%",
+      left: "-21%",
+    },
+    garnishing: 1,
+    ingredientUnitAmt: 15,
+    ingredients: [
+      {
+        id: 9,
+        amount: 45,
+        unit: "ml"
+      },
+
+      {
+        id: 1,
+        amount: 15,
+        unit: "ml"
+      },
+      {
+        id: 8,
+        amount: 15,
+        unit: "ml"
+      }
+    ],
   }
 ]
 
@@ -104,6 +168,27 @@ export const glasses:GlassType[] = [
     gap: 2,
     maskRatio: 42.69,
     padding: 25
+  },
+  {
+    id: 2,
+    name: "Colada",
+    slug: "colada",
+    strokeColor: "#fff",
+    strokeWidth: 2,
+    gap: 2,
+    // maskRatio: 83.24,
+    maskRatio: 81.05,
+    padding: 10.5
+  }
+]
+export const accessories:AccessoryType[] = [
+  {
+    id: 1,
+    name: "Straw",
+    slug: "straw",
+    strokeColor: "#fff",
+    strokeWidth: 8,
+    fill: "none"
   }
 ]
 
@@ -149,5 +234,27 @@ export const allingredients:IngredientType[] = [
     name: "Sugar Syrup",
     slug: "sugar-syrup",
     color: "#C98803",
+  },
+  {
+    id: 8,
+    name: "Coconut Milk",
+    slug: "coconut-milk",
+    color: "#FFF1A7",
+  },
+  {
+    id: 9,
+    name: "Pineapple Juice",
+    slug: "pineapple-juice",
+    color: "#DCB85B",
+  }
+]
+export const garnishings:GarnishingType[] = [
+  {
+    id: 1,
+    name: "Pineapple Wedge",
+    slug: "pineapple-wedge",
+    strokeColor: "#DCB85B",
+    strokeWidth: 1,
+    fill: "#DCB85B"
   }
 ]

@@ -1,6 +1,6 @@
 export const constants = {
   productTitle : "The Drinks Diary",
-  productDescription : "For cocktails and other drinks"
+  productDescription : "Recipe book for cocktails"
 }
 
 
