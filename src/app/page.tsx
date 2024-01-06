@@ -1,8 +1,11 @@
-import { constants } from '@/app/lib/constants'
+import { constants, metadatajson } from '@/app/lib/constants'
 import Image from 'next/image'
 import SignUpNewsletter from './ui/SignUpNewsletter'
 import DrinkMaker from './ui/DrinkMaker/DrinkMaker'
 import { drinks } from './lib/mockdata'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = metadatajson
 
 export default function Home() {
   const drink = drinks[2]
