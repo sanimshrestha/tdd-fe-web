@@ -29,3 +29,12 @@ body {
 input{
   color-scheme: dark;
 }
+html{
+  overflow: hidden;
+}
+
+@media screen and (max-height: 700px) {
+  .drinkmaker{
+    max-width: min(250px,15dvh) !important;
+  }
+}

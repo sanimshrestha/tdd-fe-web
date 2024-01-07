@@ -57,9 +57,9 @@ const DrinkMaker = (props: DrinkMakerProps) => {
 
   return (
     // <div className="w-auto relative max-w-[250px]">
-    <div className="w-auto relative"
+    <div className="w-auto relative drinkmaker"
       style={{
-        maxWidth: 'min(250px,20dvh)',
+        maxWidth: 'min(250px,18dvh)',
       }}
     >
       {ingredients && glass &&
