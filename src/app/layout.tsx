@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Lexend } from 'next/font/google'
 import './globals.css'
 import { constants } from './lib/constants'
+import StoreProvider from './StoreProvider'
 import Script from 'next/script'
 
 const lexend = Lexend({
@@ -35,7 +36,9 @@ export default function RootLayout({
       </Script>
 
       <body className={`${lexend.variable} font-sans h-full`}>
-        {children}
+        <StoreProvider>
+          {children}
+        </StoreProvider>
       </body>
     </html>
   )
