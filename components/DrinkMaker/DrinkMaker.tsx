@@ -3,11 +3,12 @@ import DrinkStack from "../DrinkStack/DrinkStack";
 import Accessory from "../Accessory";
 import Garnishing from "../Garnishing";
 import Glass from "../Glass";
+import { drinkSchemaOutput } from "@/api/schema/drink.schema";
 import { useEffect, useRef } from "react";
 
 
 const DrinkMaker = ({ drink, thumbnail = false }:
-  { drink: any, thumbnail?: boolean }) => {
+  { drink: drinkSchemaOutput, thumbnail?: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,13 +35,10 @@ const DrinkMaker = ({ drink, thumbnail = false }:
           </>
         }
         {drink.accessory &&
-          <Accessory
-            {...drink.accessory}
+          <Accessory {...drink.accessory}
             animate={!thumbnail}
           />}
-        {drink.glass &&
-          <Glass {...drink.glass}
-          />}
+        {drink.glass && <Glass {...drink.glass} />}
         {/* {drink.garnishing && <Garnishing {...drink.garnishing} animate={!thumbnail} />} */}
 
       </div >

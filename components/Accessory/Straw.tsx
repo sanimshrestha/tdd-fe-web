@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect } from "react";
 import { motion, useAnimate } from "framer-motion";
+import { drinkSchemaOutput } from "@/api/schema/drink.schema";
 
 const animationStages = [
   {
@@ -22,7 +23,8 @@ const animationStages = [
   }
 ]
 
-const Straw = (props: any) => {
+const Straw = (props: NonNullable<drinkSchemaOutput["accessory"]
+  & { animate: boolean }>) => {
   const { strokeColor = "white", strokeWidth = 2, fill = "none",
     top, left, animate: showAnimation } = props;
 

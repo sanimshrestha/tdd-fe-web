@@ -1,5 +1,5 @@
 'use client';
-// import { drinkSchemaOutput } from "@/api/schema/drink.schema";
+import { drinkSchemaOutput } from "@/api/schema/drink.schema";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 
@@ -9,7 +9,7 @@ const AMT_UNITS = {
 }
 type AmountUnit = typeof AMT_UNITS[keyof typeof AMT_UNITS];
 
-const IngredientFooter = ({ drink }: { drink: any }) => {
+const IngredientFooter = ({ drink }: { drink: drinkSchemaOutput }) => {
   const { ingredients } = drink;
   const [amtUnit, setamtUnit] = useState<AmountUnit>(AMT_UNITS.RELATIVE);
 
@@ -27,7 +27,7 @@ const IngredientFooter = ({ drink }: { drink: any }) => {
         {drink.method?.name}
       </h3>
       <ul className="flex text-foreground gap-4" onClick={changeIngredientUnit}>
-        {drink && ingredients?.map((ingredient: any, index: any) => (
+        {drink && ingredients?.map((ingredient, index) => (
           <li key={index} className="flex flex-col text-center">
             <AnimatePresence>
               {(amtUnit === AMT_UNITS.ABSOLUTE)
@@ -60,7 +60,7 @@ const IngredientFooter = ({ drink }: { drink: any }) => {
                 </motion.span>
               }
             </AnimatePresence>
-            {ingredient.name.trim().split(' ').map((word: any, index: any) =>
+            {ingredient.name.trim().split(' ').map((word, index) =>
               <span key={index} className="text-sm leading-4">
                 {word}
               </span>

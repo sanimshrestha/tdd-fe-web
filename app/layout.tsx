@@ -4,8 +4,9 @@ import "@/styles/globals.css"
 import { Lexend as FontSans } from 'next/font/google'
 import { cn } from "@/lib/utils"
 import Script from 'next/script'
-import StoreProvider from './StoreProvider'
 import { constants } from '@/lib/constants'
+import StoreProvider from './StoreProvider'
+import { Toaster } from '@/components/ui/toaster'
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
             {children}
           </div>
         </StoreProvider>
+        <Toaster />
       </body>
     </html>
   )

@@ -14,7 +14,9 @@ export function Toaster() {
 
   return (
     <ToastProvider duration={TOAST_REMOVE_DELAY}>
-      {toasts.map(function ({ id, title, description, action, variant, ...props }) {
+      {toasts.map(function (
+        { id, title, description, action, variant, ...props }
+      ) {
         return (
           <Toast key={id} {...props}>
             <div className="relative flex flex-col sm:flex-row sm:items-center">

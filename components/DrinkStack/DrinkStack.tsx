@@ -1,10 +1,11 @@
 'use client';
+import { drinkSchemaOutput } from "@/api/schema/drink.schema";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 interface DrinkStackProps {
-  ingredients: any;
-  glass: any;
+  ingredients: drinkSchemaOutput["ingredients"];
+  glass: drinkSchemaOutput["glass"];
   animate: boolean;
 }
 
@@ -26,11 +27,11 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
     }
   }, []);
 
-  const totalIngredientParts = ingredients.reduce((acc: any, curr: any) => {
+  const totalIngredientParts = ingredients.reduce((acc, curr) => {
     return acc + curr.parts;
   }, 0);
 
-  const adjustedIngredients = ingredients.map((ingredient: any) => {
+  const adjustedIngredients = ingredients.map((ingredient) => {
     return {
       ...ingredient,
       parts: (ingredient.parts / totalIngredientParts)
@@ -73,7 +74,7 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
             width: `calc(100% - ${2 * (gap + strokeWidth)}px)`,
           }}
         >
-          {adjustedIngredients.map((ingredient: any) => (
+          {adjustedIngredients.map((ingredient) => (
             <div
               key={ingredient.name}
               className="bg-transparent relative"
