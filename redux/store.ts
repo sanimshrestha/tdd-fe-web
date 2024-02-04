@@ -1,16 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit"
-import exampleReducer from "./features/example"
+import { configureStore } from "@reduxjs/toolkit";
+import { drinkApi } from "./services/drinks";
+import ui from "./features/ui";
+import feedbackApi from "./services/feedbacks";
 
-export const makeStore = () =>{
+export const makeStore = () => {
   return configureStore({
     reducer: {
-      exampleReducer
-    }
-  })
-}
+      [drinkApi.reducerPath]: drinkApi.reducer,
+      [feedbackApi.reducerPath]: feedbackApi.reducer,
+      ui,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware()
+        .concat(drinkApi.middleware)
+        .concat(feedbackApi.middleware),
+  });
+};
 
 // Infer the type of makeStore
-export type AppStore = ReturnType<typeof makeStore>
+export type AppStore = ReturnType<typeof makeStore>;
 // Infer the 'RootState' and 'AppDispatch' types from the store itself
-export type RootState = ReturnType<AppStore["getState"]>
-export type AppDispatch = AppStore["dispatch"]
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];
