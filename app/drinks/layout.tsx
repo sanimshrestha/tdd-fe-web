@@ -1,5 +1,14 @@
 import Footer from "@/components/Footer"
 import Nav from "@/components/Nav"
+import { constants } from "@/lib/constants"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: constants.productTitle,
+  description: constants.productDescription,
+  robots: 'noindex, nofollow'
+}
+
 
 export default function DrinksLayout({
   children,

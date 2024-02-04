@@ -11,6 +11,7 @@ import MethodModel from "./models/method.model";
 import IngredientStyleModel from "./models/ingredientStyle.model";
 import IngredientCategoryModel from "./models/ingredientCategory.model";
 import FeedbackModel from "./models/feedback.model";
+import NewsletterModel from "./models/newsletter.model";
 
 declare global {
   var mongoose: {
@@ -64,6 +65,7 @@ async function connectDB() {
   const accessoryModel = AccessoryModel.find();
   const methodModel = MethodModel.find();
   const feedbackModel = FeedbackModel.find();
+  const newsletterModel = NewsletterModel.find();
 
   return cached.conn;
 }

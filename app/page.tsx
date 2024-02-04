@@ -5,5 +5,5 @@ import { redirect } from 'next/navigation';
 export const metadata: Metadata = metadatajson
 
 export default function Home() {
-  redirect('/drinks');
+  redirect('/comingsoon');
 }
