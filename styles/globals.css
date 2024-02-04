@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 41% 8%;
+    --foreground: 240 5% 96%;
+
+    --card: 221 27% 12%;
+    --card-foreground: 225 4% 82%;
+
+    --popover: 222 41% 8%;
+    --popover-foreground: 225 4% 60%;
+
+    --primary: 13 62% 56%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 221 27% 12%;
+    --secondary-foreground: 225 4% 82%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 225 4% 60%;
+    --muted-placeholder: 220 4% 54%;
+
+    --accent: 221 21% 15%;
+    --accent-foreground: 240 3% 93%;
+
+    --destructive: 4 93% 69%;
+    --destructive-foreground: 210 40% 98%;
+
+    --error: 4 86% 58%;
+
+    /* --border: 214.3 31.8% 91.4%; */
+    --border: 223 12% 23%;
+    --border-secondary: 221 21% 15%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 214.3 31.8% 91.4%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+main {
+  overflow: hidden;
+}
+
+.recipe-card .drinkmaker svg {
+  max-height: 250px;
+}
+.drinkmaker svg {
+  max-height: calc(
+    100dvh - 28rem
+  ); /*27 is all other elements, 5 is the buffer for accessories and garnishes */
+}
+@media screen and (max-height: 700px) and (min-width: 640px) {
+  .drinkmaker svg {
+    max-height: calc(
+      100dvh - 24rem
+    ); /*27 is all other elements, 5 is the buffer for accessories and garnishes */
+  }
+}
+@media screen and (min-height: 750px) {
+  .drinkmaker svg {
+    max-height: clamp(250px, calc(
+      100dvh - 37rem
+    ), 500px); 
+  }
+}
+@media screen and (min-height: 750px) and (min-width: 1024px) {
+  .drinkmaker svg {
+    max-height: clamp(250px, calc(
+      100dvh - 28rem
+    ), 400px); 
+  }
+}
+/* @media screen and (min-width: 640px) {
+  .drinkmaker svg {
+    max-height: calc(
+      100dvh - 27rem
+    ); 
+  }
+}
+@media screen and (min-width: 768px) {
+  .drinkmaker svg {
+    max-height: calc(
+      100dvh - 27rem
+    ); 
+  }
+} */
+.cmdk-empty + .cmdk-search-list .cmdk-footer {
+  display: none;
+}
