@@ -8,9 +8,9 @@ import {
   createAccessory, 
   getAllAccessory } 
   from "@/api/services/accessory.service";
-import { NextResponse } from "next/server";
+import {NextResponse } from "next/server";
 
-export async function GET(response: NextResponse) {
+export async function GET(request:Request, response: NextResponse) {
  return validate(getAllAccessoriesSchema)
                 ({}, {}, {}, response, getAllAccessory);
 }
