@@ -1,12 +1,11 @@
 'use client';
 import React from "react";
 import { useFormState } from 'react-dom';
-import PrimaryButton from "../Button/PrimaryButton";
 import { constants } from '../../lib/constants';
 import { AnimatePresence, motion } from 'framer-motion';
-import signUptoNewsLetter from "@/api/actions";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import signUptoNewsLetter from "@/api/newsletter";
 
 
 export enum Status {

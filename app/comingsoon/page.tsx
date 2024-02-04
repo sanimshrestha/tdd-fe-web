@@ -1,11 +1,15 @@
-import { drinks } from '@/api/mockdata'
+'use client'
 import DrinkMaker from '@/components/DrinkMaker/DrinkMaker'
 import SignUpNewsletter from '@/components/SignUpNewsletter'
+import { Skeleton } from '@/components/ui/skeleton';
 import { constants } from '@/lib/constants'
+import { useGetDrinkBySlugQuery } from '@/redux/services/drinks';
 import Image from 'next/image'
 
+
 export default function Home() {
-  const drink = drinks[2]
+  const { data: drink, isLoading, isFetching } =
+    useGetDrinkBySlugQuery("pina-colada");
   return (
 
     <main className="relative flex h-full flex-col items-center 
@@ -19,7 +23,13 @@ export default function Home() {
         className='z-10 -mt-8  lg:mt-0
         sm:w-72 md:w-80 lg:w-96 h-40 mb-6'
       />
-      <DrinkMaker drink={drink} />
+      {isLoading ?
+        <Skeleton className="h-[400px] w-[320px] max-w-[90%] pt-6" />
+        : (
+          drink && <DrinkMaker drink={drink} />
+        )
+      }
+
       <div
         className='absolute left-0 bottom-0 w-full h-1/3 z-0
         bg-gradient-fade'

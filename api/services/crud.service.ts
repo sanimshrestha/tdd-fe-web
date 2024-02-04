@@ -22,17 +22,26 @@ export async function createItem<T>(model: Model<T>, input: T) {
       },
       { status: 201 }
     );
-  } catch (e) {
-    console.log(e);
-
-    return NextResponse.json(
-      {
-        error: `Something went wrong while creating a new 
-                ${model.modelName.toLowerCase()}`,
-      },
-      { status: 500 }
-    );
-  }
+  }catch (e: unknown) {
+    if (typeof e === 'object' && e !== null 
+        && 'code' in e && (e as any).code === 11000) {
+      return NextResponse.json(
+        {
+          error: `Duplicate ${model.modelName.toLowerCase()} found`,
+        },
+        { status: 409 }
+      );
+    }
+    else{
+      return NextResponse.json(
+        {
+          error: `Something went wrong while creating a new 
+                  ${model.modelName.toLowerCase()}`,
+        },
+        { status: 500 }
+      );
+    }
+  } 
 }
 
 export async function findItemById<T extends Document>(
