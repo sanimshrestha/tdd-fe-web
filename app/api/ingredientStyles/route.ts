@@ -10,7 +10,7 @@ import {
 } from "@/api/services/ingredientStyle.service";
 import { NextResponse } from "next/server";
 
-export async function GET(response: NextResponse) {
+export async function GET(request:Request, response: NextResponse) {
   return validate(getAllIngredientStylesSchema)
         ({}, {}, {}, response, getAllIngredientStyles);
 }
