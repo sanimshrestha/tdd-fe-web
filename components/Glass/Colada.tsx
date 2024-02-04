@@ -1,6 +1,7 @@
+import { drinkSchemaOutput } from "@/api/schema/drink.schema";
 import React from "react";
 
-const Colada = (props: any) => {
+const Colada = (props: drinkSchemaOutput["glass"]) => {
   const { strokeColor = "white", strokeWidth = 2 } = props;
 
   return (

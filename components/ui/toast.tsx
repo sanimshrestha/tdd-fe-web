@@ -16,7 +16,9 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      "fixed bottom-0 left-[50%] -translate-x-1/2 sm:top-6 sm:bottom-auto sm:right-6 sm:left-auto sm:translate-x-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 md:max-w-[420px]",
+      "fixed bottom-0 left-[50%] -translate-x-1/2 sm:top-6 sm:bottom-auto \
+      sm:right-6 sm:left-auto sm:translate-x-0 z-[100] flex max-h-screen \
+      w-full flex-col-reverse p-4 md:max-w-[420px]",
       className
     )}
     {...props}
@@ -25,7 +27,16 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastVariants = cva(
-  "group pointer-events-auto relative flex w-full items-center justify-between space-x-2 overflow-hidden rounded-xl border p-4 pt-3 pb-3.5 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+  "group pointer-events-auto relative flex w-full items-center justify-between \
+  space-x-2 overflow-hidden rounded-xl border p-4 pt-3 pb-3.5 shadow-lg \
+  transition-all data-[swipe=cancel]:translate-x-0 \
+  data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] \
+  data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] \
+  data-[swipe=move]:transition-none data-[state=open]:animate-in \
+  data-[state=closed]:animate-out data-[swipe=end]:animate-out \
+  data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full \
+  data-[state=open]:slide-in-from-top-full \
+  data-[state=open]:sm:slide-in-from-bottom-full",
   {
     variants: {
       variant: {
@@ -63,7 +74,15 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive",
+      "inline-flex h-8 shrink-0 items-center justify-center rounded-md \
+      border bg-transparent px-3 text-sm font-medium transition-colors \
+      hover:bg-secondary focus:outline-none focus:ring-1 focus:ring-ring \
+      disabled:pointer-events-none disabled:opacity-50 \
+      group-[.destructive]:border-muted/40 \
+      group-[.destructive]:hover:border-destructive/30 \
+      group-[.destructive]:hover:bg-destructive \
+      group-[.destructive]:hover:text-destructive-foreground \
+      group-[.destructive]:focus:ring-destructive",
       className
     )}
     {...props}
@@ -78,7 +97,12 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      "absolute right-1 top-1 rounded-md p-1 text-zinc-500 hover:text-muted-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600",
+      "absolute right-1 top-1 rounded-md p-1 text-zinc-500 \
+      hover:text-muted-foreground focus:opacity-100 focus:outline-none \
+      focus:ring-1 group-[.destructive]:text-red-300 \
+      group-[.destructive]:hover:text-red-50 \
+      group-[.destructive]:focus:ring-red-400 \
+      group-[.destructive]:focus:ring-offset-red-600",
       className
     )}
     toast-close=""
@@ -98,13 +122,15 @@ const ToastIcon = React.forwardRef<
     <>
       {variant === "destructive" &&
         <>
-          <div className="w-[30px] h-[30px] -left-3 sm:-left-1 absolute rounded-full border-[3px] border-transparent m-[5px]"
+          <div className="w-[30px] h-[30px] -left-3 sm:-left-1 absolute \
+          rounded-full border-[3px] border-transparent m-[5px]"
             style={{
               boxShadow: "0 0 0 2px hsla(4, 86%, 58%, 0.1)",
             }}
           ></div>
           <AlertCircleIcon
-            className="h-[22px] w-[22px] relative -left-3 sm:-left-1 border-2 border-transparent rounded-full text-error m-[9px]"
+            className="h-[22px] w-[22px] relative -left-3 sm:-left-1 \
+            border-2 border-transparent rounded-full text-error m-[9px]"
             style={{
               boxShadow: "0 0 0 2px hsla(4, 86%, 58%, 0.5)"
             }}
@@ -112,13 +138,15 @@ const ToastIcon = React.forwardRef<
         </>}
       {variant === "success" &&
         <>
-          <div className="w-[30px] h-[30px] -left-3 sm:-left-1 absolute rounded-full border-[3px] border-transparent m-[5px]"
+          <div className="w-[30px] h-[30px] -left-3 sm:-left-1 absolute \
+          rounded-full border-[3px] border-transparent m-[5px]"
             style={{
               boxShadow: "0 0 0 2px rgba(23, 178, 106, 0.1)",
             }}
           ></div>
           <CheckedCircleIcon
-            className="h-[22px] w-[22px] relative -left-3 sm:-left-1 border-2 border-transparent rounded-full text-green-500 m-[9px]"
+            className="h-[22px] w-[22px] relative -left-3 sm:-left-1 \
+            border-2 border-transparent rounded-full text-green-500 m-[9px]"
             style={{
               boxShadow: "0 0 0 2px rgba(23, 178, 106, 0.5)"
             }}

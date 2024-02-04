@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useMemo } from "react";
 import { motion, useAnimate } from "framer-motion";
+import { drinkSchemaOutput } from "@/api/schema/drink.schema";
 
 const animationStages = [
   {
@@ -22,9 +23,15 @@ const animationStages = [
   }
 ]
 
-const PineappleWedge = (props: any) => {
-  const { strokeColor = "white", strokeWidth = 2,
-    fill = "none", top = "0", left = "0", animate: showAnimation } = props;
+const PineappleWedge = (props: NonNullable<drinkSchemaOutput["garnishing"]
+  & { animate: boolean }>) => {
+  const {
+    strokeColor = "white",
+    strokeWidth = 2,
+    fill = "none",
+    top = "0",
+    left = "0",
+    animate: showAnimation } = props;
 
   const [scope, animate] = useAnimate();
 
