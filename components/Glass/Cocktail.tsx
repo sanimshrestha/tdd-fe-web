@@ -1,4 +1,4 @@
-import { drinkSchemaOutput } from "@/api/schema/drink.schema";
+import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import React from "react";
 
 const Cocktail = (props: drinkSchemaOutput["glass"]) => {

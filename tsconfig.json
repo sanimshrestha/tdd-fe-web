@@ -25,7 +25,22 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@server/*": [
+        "./app/_server/*"
+      ],
+      "@icons/*": [
+        "./components/icons/*"
+      ],
+      "@redux/*": [
+        "./redux/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@ui/*": [
+        "./components/ui/*"
+      ],
     }
   },
   "include": [

@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect } from "react";
 import { motion, useAnimate } from "framer-motion";
-import { drinkSchemaOutput } from "@/api/schema/drink.schema";
+import { drinkSchemaOutput } from "@server/schema/drink.schema";
 
 const animationStages = [
   {

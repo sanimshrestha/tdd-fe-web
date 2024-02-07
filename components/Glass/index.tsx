@@ -1,7 +1,7 @@
 import React from "react";
 import Cocktail from "./Cocktail";
 import Colada from "./Colada";
-import { drinkSchemaOutput } from "@/api/schema/drink.schema";
+import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import Martini from "./Martini";
 import Coupe from "./Coupe";
 import Rocks from "./Rocks";

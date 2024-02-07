@@ -3,7 +3,7 @@ import DrinkStack from "../DrinkStack/DrinkStack";
 import Accessory from "../Accessory";
 import Garnishing from "../Garnishing";
 import Glass from "../Glass";
-import { drinkSchemaOutput } from "@/api/schema/drink.schema";
+import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { useEffect, useRef } from "react";
 
 

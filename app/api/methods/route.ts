@@ -1,10 +1,10 @@
-import validate from "@/api/middleware/validateResource";
+import validate from "@server/middleware/validateResource";
 import {
   createMethodInput,
   createMethodSchema,
   getAllMethodsSchema,
-} from "@/api/schema/method.schema";
-import { createMethod, getAllMethods } from "@/api/services/method.service";
+} from "@server/schema/method.schema";
+import { createMethod, getAllMethods } from "@server/services/method.service";
 import { NextResponse } from "next/server";
 
 export async function GET(request:Request, response: NextResponse) {

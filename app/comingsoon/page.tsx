@@ -1,9 +1,9 @@
 'use client'
-import DrinkMaker from '@/components/DrinkMaker/DrinkMaker'
-import SignUpNewsletter from '@/components/SignUpNewsletter'
-import { Skeleton } from '@/components/ui/skeleton';
+import DrinkMaker from '@components/DrinkMaker/DrinkMaker'
+import SignUpNewsletter from '@components/SignUpNewsletter'
+import { Skeleton } from '@ui/skeleton';
 import { constants } from '@/lib/constants'
-import { useGetDrinkBySlugQuery } from '@/redux/services/drinks';
+import { useGetDrinkBySlugQuery } from '@redux/services/drinks';
 import Image from 'next/image'
 
 

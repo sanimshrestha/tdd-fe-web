@@ -1,12 +1,12 @@
 'use client'
-import DrinkMaker from "@/components/DrinkMaker/DrinkMaker";
-import IngredientFooter from "@/components/IngredientFooter";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useToast } from "@/components/ui/use-toast";
-import { setRecentDrink } from "@/redux/features/ui";
-import { useAppDispatch } from "@/redux/hooks";
-import { useGetDrinkBySlugQuery } from "@/redux/services/drinks";
+import DrinkMaker from "@components/DrinkMaker/DrinkMaker";
+import IngredientFooter from "@components/IngredientFooter";
+import { Button } from "@ui/button";
+import { Skeleton } from "@ui/skeleton";
+import { useToast } from "@ui/use-toast";
+import { setRecentDrink } from "@redux/features/ui";
+import { useAppDispatch } from "@redux/hooks";
+import { useGetDrinkBySlugQuery } from "@redux/services/drinks";
 import { Share1Icon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
 

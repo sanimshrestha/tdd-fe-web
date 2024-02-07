@@ -1,4 +1,4 @@
-import { createFeedbackInput } from "@/api/schema/feedback.schema";
+import { createFeedbackInput } from "@server/schema/feedback.schema";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ObjectId } from "mongoose";
 

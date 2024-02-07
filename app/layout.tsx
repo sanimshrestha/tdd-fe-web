@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import Script from 'next/script'
 import { constants } from '@/lib/constants'
 import StoreProvider from './StoreProvider'
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from '@ui/toaster'
 
 export const fontSans = FontSans({
   subsets: ["latin"],

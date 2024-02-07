@@ -9,25 +9,25 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command"
-import DiceIcon from "./icons/DiceIcon"
-import MessageSmileSquare from "./icons/MessageSmileSquare"
-// import MessageChatBubble from "./icons/MessageChatBubble"
-// import FileIcon from "./icons/FileIcon"
+} from "@ui/command"
+import DiceIcon from "@icons/DiceIcon"
+import MessageSmileSquare from "@icons/MessageSmileSquare"
+// import MessageChatBubble from "@icons/MessageChatBubble"
+// import FileIcon from "@icons/FileIcon"
 import { Button } from "./ui/button"
-import MagnifyingGlassIcon from "./icons/MagnifyingGlassIcon"
-import { useGetDrinksQuery } from "@/redux/services/drinks"
-import { getAllDrinksOutput } from "@/api/schema/drink.schema"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import MagnifyingGlassIcon from "@icons/MagnifyingGlassIcon"
+import { useGetDrinksQuery } from "@redux/services/drinks"
+import { getAllDrinksOutput } from "@server/schema/drink.schema"
+import { useAppDispatch, useAppSelector } from "@redux/hooks"
 import { useRouter } from "next/navigation"
-import ArrowUpIcon from "./icons/ArrowUpIcon"
-import ArrowDownIcon from "./icons/ArrowDownIcon"
-import EnterIcon from "./icons/EnterIcon"
+import ArrowUpIcon from "@icons/ArrowUpIcon"
+import ArrowDownIcon from "@icons/ArrowDownIcon"
+import EnterIcon from "@icons/EnterIcon"
 import {
   setCommandDialogOpen,
   setFeedbackDialogOpen,
   uiState
-} from "@/redux/features/ui"
+} from "@redux/features/ui"
 
 type SearchDrinks = {
   slug: string

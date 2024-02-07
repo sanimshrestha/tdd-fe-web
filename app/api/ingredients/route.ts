@@ -1,13 +1,13 @@
-import validate from "@/api/middleware/validateResource";
+import validate from "@server/middleware/validateResource";
 import {
   createIngredientInput,
   createIngredientSchema,
   getAllIngredientsSchema,
-} from "@/api/schema/ingredient.schema";
+} from "@server/schema/ingredient.schema";
 import {
   createIngredient,
   getAllIngredients,
-} from "@/api/services/ingredient.service";
+} from "@server/services/ingredient.service";
 import { NextResponse } from "next/server";
 
 export async function GET(request:Request, response: NextResponse) {

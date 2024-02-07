@@ -1,9 +1,9 @@
-import validate from "@/api/middleware/validateResource";
+import validate from "@server/middleware/validateResource";
 import {
   drinkSlugParamsInput,
   drinkSlugParamsSchema,
-} from "@/api/schema/drink.schema";
-import { deleteDrink, findDrink } from "@/api/services/drink.service";
+} from "@server/schema/drink.schema";
+import { deleteDrink, findDrink } from "@server/services/drink.service";
 import { NextResponse } from "next/server";
 
 export async function GET(

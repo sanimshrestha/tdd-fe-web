@@ -5,7 +5,7 @@ import { constants } from '../../lib/constants';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import signUptoNewsLetter from "@/api/newsletter";
+import signUptoNewsLetter from "@server/newsletter";
 
 
 export enum Status {
