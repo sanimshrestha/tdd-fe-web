@@ -1,10 +1,10 @@
-import validate from "@/api/middleware/validateResource";
+import validate from "@server/middleware/validateResource";
 import { 
   createGlassInput, 
   createGlassSchema, 
   getAllGlassSchema } 
-  from "@/api/schema/glass.schema";
-import { createGlass, getAllGlasses } from "@/api/services/glass.service";
+  from "@server/schema/glass.schema";
+import { createGlass, getAllGlasses } from "@server/services/glass.service";
 import { NextResponse } from "next/server";
 
 export async function GET(request:Request, response: NextResponse) {

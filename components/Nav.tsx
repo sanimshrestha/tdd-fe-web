@@ -2,7 +2,7 @@
 import Link from "next/link";
 import FeedbackForm from "./FeedbackForm";
 import SearchBar from "./SearchBar";
-import LogoIcon from "./icons/LogoIcon";
+import LogoIcon from "@icons/LogoIcon";
 
 const Nav = () => {
 

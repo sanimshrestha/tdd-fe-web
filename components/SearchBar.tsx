@@ -3,8 +3,8 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
 import { Input } from "./ui/input"
 import { CommandShortcut } from "./ui/command"
 import SearchCommandDialog from "./SearchCommandDialog"
-import { useAppDispatch } from "@/redux/hooks"
-import { setCommandDialogOpen } from "@/redux/features/ui"
+import { useAppDispatch } from "@redux/hooks"
+import { setCommandDialogOpen } from "@redux/features/ui"
 
 export default function SearchBar({ className }: { className?: string }) {
   const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 'use client';
-import { drinkSchemaOutput } from "@/api/schema/drink.schema";
+import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 

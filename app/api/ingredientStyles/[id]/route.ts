@@ -1,9 +1,9 @@
-import validate from "@/api/middleware/validateResource";
-import { paramsIdInput, paramsIdSchema } from "@/api/schema/common.schema";
+import validate from "@server/middleware/validateResource";
+import { paramsIdInput, paramsIdSchema } from "@server/schema/common.schema";
 import { 
   deleteIngredientStyle, 
   findIngredientStyleById 
-} from "@/api/services/ingredientStyle.service";
+} from "@server/services/ingredientStyle.service";
 import { NextResponse } from "next/server";
 
 export async function GET(

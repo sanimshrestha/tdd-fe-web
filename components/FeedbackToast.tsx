@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@ui/button"
 import { useToast } from "./ui/use-toast"
 
 export function ToastWithTitle() {

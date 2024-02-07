@@ -2,12 +2,12 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger
-} from "@/components/ui/sheet"
+} from "@ui/sheet"
 import Link from "next/link"
 import FeedbackForm from "./FeedbackForm"
 import SearchBar from "./SearchBar"
-import HamburgerIcon from "./icons/HamburgerIcon"
-import LogoIcon from "./icons/LogoIcon"
+import HamburgerIcon from "@icons/HamburgerIcon"
+import LogoIcon from "@icons/LogoIcon"
 
 function MenuSheet() {
   return (

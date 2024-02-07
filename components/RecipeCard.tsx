@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 
-import { drinkSchemaOutput } from "@/api/schema/drink.schema"
+import { drinkSchemaOutput } from "@server/schema/drink.schema"
 import DrinkMaker from "./DrinkMaker/DrinkMaker"
 import { useRouter } from "next/navigation"
 import {

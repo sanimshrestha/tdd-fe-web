@@ -1,6 +1,6 @@
 "use client"
-import { feedbackSchemaInput } from "@/api/schema/feedback.schema"
-import { Button } from "@/components/ui/button"
+import { feedbackSchemaInput } from "@server/schema/feedback.schema"
+import { Button } from "@ui/button"
 import {
   Dialog,
   DialogClose,
@@ -9,14 +9,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { useCreateFeedbackMutation } from "@/redux/services/feedbacks"
+} from "@ui/dialog"
+import { Input } from "@ui/input"
+import { useCreateFeedbackMutation } from "@redux/services/feedbacks"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import z from "zod"
-import MessageSmileSquare from "./icons/MessageSmileSquare"
 import { Checkbox } from "./ui/checkbox"
 import {
   Form, FormControl, FormField, FormItem, FormLabel, FormMessage
@@ -25,9 +24,10 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue
 } from "./ui/select"
 import { Textarea } from "./ui/textarea"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { setFeedbackDialogOpen, uiState } from "@/redux/features/ui"
+import { useAppDispatch, useAppSelector } from "@redux/hooks"
+import { setFeedbackDialogOpen, uiState } from "@redux/features/ui"
 import { useToast } from "./ui/use-toast"
+import MessageSmileSquare from "@icons/MessageSmileSquare"
 
 declare global {
   interface Window {

@@ -1,6 +1,6 @@
-import validate from "@/api/middleware/validateResource";
-import { paramsIdInput, paramsIdSchema } from "@/api/schema/common.schema";
-import { deleteGlass, findGlassById } from "@/api/services/glass.service";
+import validate from "@server/middleware/validateResource";
+import { paramsIdInput, paramsIdSchema } from "@server/schema/common.schema";
+import { deleteGlass, findGlassById } from "@server/services/glass.service";
 import { NextResponse } from "next/server";
 
 export async function GET(

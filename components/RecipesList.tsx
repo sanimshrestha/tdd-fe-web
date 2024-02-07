@@ -1,7 +1,7 @@
 'use client'
 import React from "react"
 import RecipeCard from "./RecipeCard"
-import { useGetDrinksQuery } from "@/redux/services/drinks"
+import { useGetDrinksQuery } from "@redux/services/drinks"
 import { Skeleton } from "./ui/skeleton";
 // import {
 //   Pagination,
