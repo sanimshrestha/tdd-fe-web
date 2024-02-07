@@ -23,7 +23,11 @@ const Cocktail = (props: drinkSchemaOutput["glass"]) => {
       </svg>
 
       {/* Svg for the glass to display */}
-      <svg width="100%" height="100%" viewBox="0 0 226 342" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg id="cocktail-svg" width="100%" height="100%" viewBox="0 0 226 342" fill="none" xmlns="http://www.w3.org/2000/svg"
+        style={{
+          aspectRatio: "226/342",
+        }}
+      >
         <path
           d="M113 144.609C113 144.609 1.51465 101.101 1.51465 
               1.49684H224.485C224.485 95.8264 113 144.609 113 144.609Z"

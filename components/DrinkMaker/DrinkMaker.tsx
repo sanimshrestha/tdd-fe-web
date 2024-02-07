@@ -12,14 +12,22 @@ const DrinkMaker = ({ drink, thumbnail = false }:
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (ref.current) {
-      const height = ref.current.offsetHeight;
-      ref.current.style.marginTop = `${height * 0.15}px`; // Set top margin to 10% of the element's height
+    if (drink?.glass) {
+      if (ref.current) {
+        const height = ref.current.offsetHeight;
+        ref.current.style.marginTop = `${height * 0.15}px`; // Set top margin to 10% of the element's height
+        ref.current.style.height = `${height}px`;
+        const svg = `${drink.glass.name.toLowerCase()}-svg`
+        const maskEl = document.getElementById(svg);
+        if (maskEl && maskEl.style.aspectRatio) {
+          ref.current.style.aspectRatio = maskEl.style.aspectRatio;
+        }
+      }
     }
-  }, []);
+  }, [drink]);
 
   return (
-    <div ref={ref} className="w-auto drinkmaker flex flex-col justify-end">
+    <div ref={ref} className="drinkmaker w-auto flex flex-col justify-end">
       <div className="w-auto relative"
       // style={{
       //   maxWidth: 'min(250px,18dvh)',
