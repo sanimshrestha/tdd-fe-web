@@ -24,7 +24,11 @@ const Coupe = (props: drinkSchemaOutput["glass"]) => {
       </svg>
 
       {/* Svg for the glass to display */}
-      <svg width="100%" height="100%" viewBox="0 0 506 706" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg id="coupe-svg" width="100%" height="100%" viewBox="0 0 506 706" fill="none" xmlns="http://www.w3.org/2000/svg"
+        style={{
+          aspectRatio: "506/706",
+        }}
+      >
         <path d="M63 0C-41.00005 185.5 127 217 253 217L252.863 636.073
                 C252.861 644.057 246.967 650.758 239.114 652.197
                 C210.85 657.375 167.659 669.655 126 704"

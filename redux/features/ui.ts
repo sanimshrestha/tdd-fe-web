@@ -47,5 +47,8 @@ export const uiSlice = createSlice({
     },
   },
 });
-export const { setRecentDrink, setFeedbackDialogOpen, setCommandDialogOpen } = uiSlice.actions;
+export const { 
+  setRecentDrink, 
+  setFeedbackDialogOpen, 
+  setCommandDialogOpen } = uiSlice.actions;
 export default uiSlice.reducer;
