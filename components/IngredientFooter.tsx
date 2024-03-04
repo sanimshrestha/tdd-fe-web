@@ -3,21 +3,26 @@ import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 
-const AMT_UNITS = {
-  ABSOLUTE: 'absolute',
-  RELATIVE: 'relative',
-}
-type AmountUnit = typeof AMT_UNITS[keyof typeof AMT_UNITS];
 
 const IngredientFooter = ({ drink }: { drink: drinkSchemaOutput }) => {
   const { ingredients } = drink;
-  const [amtUnit, setamtUnit] = useState<AmountUnit>(AMT_UNITS.RELATIVE);
+  const [selectedAmtUnitIdx, setamtUnitIdx] = useState<number>(0);
 
+  const adjustedIngredients = ingredients?.map((ingredient) => {
+    return {
+      ...ingredient,
+      amount: [ingredient.parts, ...ingredient.amount || []],
+      unit: ["", ...ingredient.unit || []],
+    };
+  });
+
+  const numIngredientUnits = adjustedIngredients[0].unit.length;
 
   const changeIngredientUnit = () => {
-    setamtUnit((prevUnit) => prevUnit === AMT_UNITS.RELATIVE
-      ? AMT_UNITS.ABSOLUTE
-      : AMT_UNITS.RELATIVE);
+    setamtUnitIdx(selectedAmtUnitIdx =>
+      selectedAmtUnitIdx === numIngredientUnits - 1
+        ? 0
+        : (selectedAmtUnitIdx + 1));
   }
 
   return (
@@ -27,38 +32,27 @@ const IngredientFooter = ({ drink }: { drink: drinkSchemaOutput }) => {
         {drink.method?.name}
       </h3>
       <ul className="flex text-foreground gap-4" onClick={changeIngredientUnit}>
-        {drink && ingredients?.map((ingredient, index) => (
+        {drink && adjustedIngredients?.map((ingredient, index) => (
           <li key={index} className="flex flex-col text-center">
             <AnimatePresence>
-              {(amtUnit === AMT_UNITS.ABSOLUTE)
-                ? <div className="flex items-baseline">
-                  <motion.span
-                    className="text-2xl leading-8 font-light mb-1 select-none"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    {ingredient.amount}
-                  </motion.span>
-                  <motion.span
-                    className="text-sm font-light  mb-1 select-none"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    {ingredient.unit}
-                  </motion.span>
-                </div>
-
-                : <motion.span
-                  className="text-3xl leading-8 font-light mb-1 select-none"
+              <div className="flex items-baseline justify-center">
+                {ingredient.amount && <motion.span
+                  className="text-2xl leading-8 font-light mb-1 select-none"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  {ingredient.parts}
-                </motion.span>
-              }
+                  {ingredient.amount[selectedAmtUnitIdx] || ""}
+                </motion.span>}
+                {ingredient.unit && <motion.span
+                  className="text-sm font-light  mb-1 select-none"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  {ingredient.unit[selectedAmtUnitIdx] || ""}
+                </motion.span>}
+              </div>
             </AnimatePresence>
             {ingredient.name.trim().split(' ').map((word, index) =>
               <span key={index} className="text-sm leading-4">
