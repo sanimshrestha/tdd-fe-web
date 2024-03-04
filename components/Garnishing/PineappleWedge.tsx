@@ -23,8 +23,9 @@ const animationStages = [
   }
 ]
 
-const PineappleWedge = (props: NonNullable<drinkSchemaOutput["garnishing"]
-  & { animate: boolean }>) => {
+const PineappleWedge = (
+  props: NonNullable<drinkSchemaOutput["garnishing"]>[number]
+    & { animate: boolean }) => {
   const {
     strokeColor = "white",
     strokeWidth = 2,

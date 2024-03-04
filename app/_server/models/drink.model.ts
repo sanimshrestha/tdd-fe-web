@@ -12,11 +12,13 @@ const DrinkSchema = new Schema(
       top: String,
       left: String,
     },
-    garnishing: {
-      ref: { type: Schema.Types.ObjectId, ref: "Garnishing" },
-      top: String,
-      left: String,
-    },
+    garnishing: [
+      {
+        ref: { type: Schema.Types.ObjectId, ref: "Garnishing" },
+        top: String,
+        left: String,
+      }
+    ],
     ingredients: [
       {
         ref: { type: Schema.Types.ObjectId, ref: "Ingredient", required: true },
