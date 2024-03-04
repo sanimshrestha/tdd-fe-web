@@ -32,7 +32,7 @@ const drinkSchemaInput = object({
   method: ObjectIdSchema.shape._id,
   glass: ObjectIdSchema.shape._id,
   accessory: ObjectRefPositionSchema.optional(),
-  garnishing: ObjectRefPositionSchema.optional(),
+  garnishing:  array(ObjectRefPositionSchema).optional(),
   ingredients: array(DrinkIngredientInputSchema),
 });
 
@@ -75,7 +75,7 @@ export const drinkSchemaOutput = ObjectIdNameSchema.extend({
   method: MethodSchema,
   glass: GlassSchema,
   accessory: DrinkAccessoryOutputSchema.optional(),
-  garnishing: DrinkGarnishingOutputSchema.optional(),
+  garnishing: array(DrinkGarnishingOutputSchema).optional(),
   ingredients: array(DrinkIngredientOutputSchema),
 });
 

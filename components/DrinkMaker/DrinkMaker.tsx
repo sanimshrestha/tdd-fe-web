@@ -47,8 +47,12 @@ const DrinkMaker = ({ drink, thumbnail = false }:
             animate={!thumbnail}
           />}
         {drink.glass && <Glass {...drink.glass} />}
-        {/* {drink.garnishing && <Garnishing {...drink.garnishing} animate={!thumbnail} />} */}
-
+        {/* {drink.garnishing?.map((garnishing) =>
+          <Garnishing
+            key={garnishing.name}
+            {...garnishing}
+            animate={!thumbnail} />
+        )} */}
       </div >
     </div>
 
