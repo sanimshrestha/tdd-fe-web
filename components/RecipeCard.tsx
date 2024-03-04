@@ -33,7 +33,9 @@ const RecipeCard = ({ className, drink, ...props }:
       </CardContent>
       <CardFooter className="flex flex-col gap-2 text-center">
         <CardTitle>{drink.name}</CardTitle>
-        <CardDescription>{drink.drinkCategory?.name}</CardDescription>
+        <CardDescription className="h-5">
+          {drink.drinkCategory?.name}
+        </CardDescription>
       </CardFooter>
     </Card>
   )
