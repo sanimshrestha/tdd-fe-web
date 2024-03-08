@@ -2,9 +2,10 @@ import z, { array, number, object, string } from "zod";
 import { ObjectIdNameSchema } from "./common.schema";
 
 export const GarnishingSchema = ObjectIdNameSchema.extend({
-  strokeColor: string(),
-  strokeWidth: number(),
-  fill: string(),
+  type: string(),
+  strokeColor: string().optional(),
+  strokeWidth: number().optional(),
+  fill: string().optional(),
 });
 
 export const garnishingSchemaOutput = GarnishingSchema;

@@ -3,6 +3,7 @@ import mongoose, { InferSchemaType, Schema } from "mongoose";
 const GarnishingSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    type: { type: String, required: true },
     strokeColor: { type: String },
     strokeWidth: { type: Number },
     fill: { type: String },
