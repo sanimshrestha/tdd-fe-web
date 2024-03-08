@@ -32,7 +32,10 @@ const drinkSchemaInput = object({
   method: ObjectIdSchema.shape._id,
   glass: ObjectIdSchema.shape._id,
   accessory: ObjectRefPositionSchema.optional(),
-  garnishing:  array(ObjectRefPositionSchema).optional(),
+  garnishing:  array(ObjectRefPositionSchema.extend({
+    rotation: string(),
+    placement: string(),
+  })).optional(),
   ingredients: array(DrinkIngredientInputSchema),
 });
 
@@ -46,7 +49,9 @@ const DrinkAccessoryOutputSchema = ObjectRefPositionSchema.extend({
   };
 });
 
-const DrinkGarnishingOutputSchema = ObjectRefPositionSchema.extend({
+const DrinkGarnishingOutputSchema = ObjectRefPositionSchema.partial().extend({
+  rotation: string().optional(),
+  placement: string().optional(),
   ref: GarnishingSchema,
 }).transform((data) => {
   const { ref: populatedContents, ...rest } = data;

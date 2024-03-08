@@ -17,6 +17,8 @@ const DrinkSchema = new Schema(
         ref: { type: Schema.Types.ObjectId, ref: "Garnishing" },
         top: String,
         left: String,
+        rotation: String,
+        placement: String,
       }
     ],
     ingredients: [

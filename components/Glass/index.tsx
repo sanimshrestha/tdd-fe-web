@@ -1,26 +1,27 @@
 import React from "react";
-import Cocktail from "./Cocktail";
-import Colada from "./Colada";
 import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import Martini from "./Martini";
 import Coupe from "./Coupe";
 import Rocks from "./Rocks";
+import Collins from "./Collins";
+import Hurricane from "./Hurricane";
 
 const Glass = (props: drinkSchemaOutput["glass"]) => {
-  const { name = "Cocktail" } = props;
+  const { name = "martini" } = props;
 
   switch (name.toLowerCase()) {
-    case 'colada':
-      return <Colada {...props} />;
+    case 'hurricane':
+      return <Hurricane {...props} />;
     case 'martini':
       return <Martini {...props} />;
+    case 'collins':
+      return <Collins {...props} />;
     case 'coupe':
       return <Coupe {...props} />;
     case 'rocks':
       return <Rocks {...props} />;
-    case 'cocktail':
     default:
-      return <Cocktail {...props} />;
+      return <Martini {...props} />;
   }
 };
 

@@ -2,6 +2,8 @@ import z, { array, number, object, string } from "zod";
 import { ObjectIdNameSchema } from "./common.schema";
 
 export const GlassSchema = ObjectIdNameSchema.extend({
+  width: number(),
+  height: number(),
   strokeColor: string().optional(),
   strokeWidth: number().optional(),
   gap: number().optional(),

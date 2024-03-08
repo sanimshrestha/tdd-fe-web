@@ -4,58 +4,64 @@ import Accessory from "../Accessory";
 import Garnishing from "../Garnishing";
 import Glass from "../Glass";
 import { drinkSchemaOutput } from "@server/schema/drink.schema";
-import { useEffect, useRef } from "react";
-
+import { useEffect, useState } from "react";
+import useScreenSize from "@/lib/hooks/useScreenSize";
+import { clamp } from "@/lib/utils";
+import { drinkGrid } from "@/lib/constants";
 
 const DrinkMaker = ({ drink, thumbnail = false }:
   { drink: drinkSchemaOutput, thumbnail?: boolean }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const [dimensions, setdimensions] = useState(drinkGrid.dimensionsPx);
+  const screenSize = useScreenSize();
 
   useEffect(() => {
-    if (drink?.glass) {
-      if (ref.current) {
-        const height = ref.current.offsetHeight;
-        ref.current.style.marginTop = `${height * 0.15}px`; // Set top margin to 10% of the element's height
-        ref.current.style.height = `${height}px`;
-        const svg = `${drink.glass.name.toLowerCase()}-svg`
-        const maskEl = document.getElementById(svg);
-        if (maskEl && maskEl.style.aspectRatio) {
-          ref.current.style.aspectRatio = maskEl.style.aspectRatio;
-        }
-      }
+    if (screenSize.height > 0) {
+      const height = thumbnail ? 320
+        : clamp(screenSize.height * drinkGrid.suggestedGlassHeight,
+          drinkGrid.minGlassHeightPx, drinkGrid.dimensionsPx.height);
+
+      const width = height *
+        (drinkGrid.dimensionsPx.width / drinkGrid.dimensionsPx.height);
+      setdimensions({ width, height });
     }
-  }, [drink]);
+  }, [thumbnail, screenSize]);
 
   return (
-    <div ref={ref} className="drinkmaker w-auto flex flex-col justify-end">
-      <div className="w-auto relative"
-      // style={{
-      //   maxWidth: 'min(250px,18dvh)',
-      // }}
-      >
-        {drink.ingredients && drink.glass &&
-          <>
+    <div className="drinkmaker relative flex flex-col justify-end"
+      style={{
+        width: `${dimensions.width}px`,
+        height: `${dimensions.height}px`,
+      }} >
+      {drink.glass && drink.ingredients &&
+        <>
+          <div className="relative mx-auto"
+            style={{
+              width: `${drink.glass.width}%`,
+              height: `${drink.glass.height}%`,
+            }}
+          >
             <DrinkStack
               ingredients={drink.ingredients}
               glass={drink.glass}
               animate={!thumbnail}
             />
-          </>
-        }
-        {drink.accessory &&
-          <Accessory {...drink.accessory}
-            animate={!thumbnail}
-          />}
-        {drink.glass && <Glass {...drink.glass} />}
-        {/* {drink.garnishing?.map((garnishing) =>
-          <Garnishing
-            key={garnishing.name}
-            {...garnishing}
-            animate={!thumbnail} />
-        )} */}
-      </div >
+            {drink.accessory &&
+              <Accessory {...drink.accessory}
+                animate={!thumbnail}
+              />}
+            <Glass {...drink.glass} />
+          </div >
+          {drink.garnishing?.map((garnishing) =>
+            <Garnishing
+              key={garnishing.name}
+              garnishing={garnishing}
+              // {...garnishing}
+              glass={drink.glass}
+              animate={!thumbnail} />
+          )}
+        </>
+      }
     </div>
-
   )
 };
 

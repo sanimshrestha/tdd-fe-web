@@ -84,49 +84,6 @@ main {
   overflow: hidden;
 }
 
-.recipe-card .drinkmaker svg {
-  max-height: 250px;
-}
-.drinkmaker svg {
-  max-height: calc(
-    100dvh - 28rem
-  ); /*27 is all other elements, 5 is the buffer for accessories and garnishes */
-}
-@media screen and (max-height: 700px) and (min-width: 640px) {
-  .drinkmaker svg {
-    max-height: calc(
-      100dvh - 24rem
-    ); /*27 is all other elements, 5 is the buffer for accessories and garnishes */
-  }
-}
-@media screen and (min-height: 750px) {
-  .drinkmaker svg {
-    max-height: clamp(250px, calc(
-      100dvh - 37rem
-    ), 500px); 
-  }
-}
-@media screen and (min-height: 750px) and (min-width: 1024px) {
-  .drinkmaker svg {
-    max-height: clamp(250px, calc(
-      100dvh - 28rem
-    ), 400px); 
-  }
-}
-/* @media screen and (min-width: 640px) {
-  .drinkmaker svg {
-    max-height: calc(
-      100dvh - 27rem
-    ); 
-  }
-}
-@media screen and (min-width: 768px) {
-  .drinkmaker svg {
-    max-height: calc(
-      100dvh - 27rem
-    ); 
-  }
-} */
 .cmdk-empty + .cmdk-search-list .cmdk-footer {
   display: none;
 }

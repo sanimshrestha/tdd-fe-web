@@ -5,7 +5,7 @@ const Martini = (props: drinkSchemaOutput["glass"]) => {
   const { strokeColor = "white", strokeWidth = 2 } = props;
 
   return (
-    <div className="relative pointer-events-none">
+    <div className="relative pointer-events-none z-10">
 
       {/* clip path from svg for masking the drink stack */}
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg"

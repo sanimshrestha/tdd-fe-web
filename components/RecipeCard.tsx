@@ -20,13 +20,13 @@ const RecipeCard = ({ className, drink, ...props }:
   return (
     <Card
       className={
-        cn("recipe-card w-[384px] max-w-[90%] pt-6 cursor-pointer",
+        cn("recipe-card w-[384px] max-w-[90%] pt-12 cursor-pointer",
           className)}
       {...props}
       onClick={() => { router.push(`/drinks/${drink.slug}`) }}
     >
       <CardContent className="flex justify-center gap-4">
-        <div className="h-[320px] max-w-[200px] flex 
+        <div className="h-[320px] flex 
                         flex-col justify-end relative">
           <DrinkMaker drink={drink} thumbnail={true} />
         </div>
