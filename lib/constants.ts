@@ -57,4 +57,13 @@ export const metadatajson: Metadata = {
   },
 };
 
+export const drinkGrid = {
+  dimensionsPx:{
+  width: 504,
+  height: 704,
+},
+minGlassHeightPx: 250,
+suggestedGlassHeight: 0.45,
+};
+
 export type ConstantsType = typeof constants;
