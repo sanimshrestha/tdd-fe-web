@@ -1,4 +1,5 @@
 'use client';
+import useScreenSize from "@/lib/hooks/useScreenSize";
 import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -13,19 +14,52 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
   const {
     drinkPaddingPercent = 25,
     drinkContainerHeightPercent = 100,
-    gap = 2,
+    ingredientGap = 2,
     strokeWidth = 2 } = glass;
-  const [blur, setblur] = useState(0);
+  let {
+    sideGap = 2,
+    leftPadding = 0,
+    bottomGap = 2, } = glass;
+  const [blur, setblur] = useState(12);
+  const [glassFillAspect, setglassFillAspect] = useState("1 / 1");
+
+  const screenSize = useScreenSize();
 
   const ref = useRef<HTMLDivElement>(null);
 
+  if (!animate) {
+    //if its being rendered in a thumbnail
+    sideGap = sideGap / 2;
+    leftPadding = leftPadding / 2;
+    bottomGap = bottomGap / 2;
+
+  }
+
   useEffect(() => {
-    if (ref.current) {
-      const height = ref.current.offsetHeight;
-      setblur(height * 0.082);
-      // ref.current.style.marginTop = `${height * 0.15}px`; // Set top margin to 10% of the element's height
+    setTimeout(() => {
+      if (ref.current) {
+        const height = ref.current.offsetHeight;
+        const parentHeight = ref.current.parentElement
+          ?.parentElement?.offsetHeight || 0;
+        const blurRefCurrent = height * 0.082;
+        const blurRefParent = parentHeight * 0.044;
+        setblur(Math.min(blurRefCurrent, blurRefParent));
+      }
+    }, 300);
+  }, [screenSize]);
+
+  useEffect(() => {
+    if (glass?.name) {
+      setglassFillAspect(
+        `${document.getElementById(`${glass.name.toLowerCase()}-mask`)
+          ?.getAttribute("data-width")} 
+          / 
+          ${document.getElementById(`${glass.name.toLowerCase()}-mask`)
+          ?.getAttribute("data-height")}
+          `
+      );
     }
-  }, []);
+  }, [glass]);
 
   const totalIngredientParts = ingredients.reduce((acc, curr) => {
     return acc + curr.parts;
@@ -64,14 +98,14 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
         animate={"show"}
         style={{ height: drinkContainerHeightPercent + "%", }}
       >
-        <div className="relative flex flex-col-reverse"
+        <div className="absolute flex flex-col-reverse"
           style={{
             clipPath: `url(#${glass.name.toLowerCase()}-mask)`,
-            left: `${2 * strokeWidth}px`,
-            top: `${2 * strokeWidth}px`,
-            gap: `${gap}px`,
-            height: `calc(100% - ${2 * (gap + strokeWidth)}px)`,
-            width: `calc(100% - ${2 * (gap + strokeWidth)}px)`,
+            left: `${sideGap + strokeWidth + leftPadding}px`,
+            bottom: `${bottomGap}px`,
+            gap: `${ingredientGap}px`,
+            width: `calc(100% - ${2 * (sideGap + strokeWidth)}px)`,
+            aspectRatio: `${glassFillAspect}`,
           }}
         >
           {adjustedIngredients.map((ingredient) => (
@@ -107,13 +141,14 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
           {/* The glow div applying backdropFilter to previous div block */}
           <div
             className="absolute bottom-0 left-0 pointer-events-none 
-                    opacity-40 scale-150"
+                    opacity-40 scale-150 transition-[backdrop-filter] 
+                    duration-300"
             style={{
               height: `calc(${drinkContainerHeightPercent}% - 
-                    ${2 * (gap + strokeWidth)}px)`,
+                    ${strokeWidth}px)`,
               // width: `calc(100% - ${2 * (gap + strokeWidth)}px)`,
               width: '100vw',
-              top: `${2 * strokeWidth}px`,
+              top: `${strokeWidth}px`,
               backdropFilter: `blur(${blur}px)`,
               left: `calc(-1 * (100vw - 100%) / 2)`
             }}>

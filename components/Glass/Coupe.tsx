@@ -13,13 +13,14 @@ const Coupe = (props: drinkSchemaOutput["glass"]) => {
         <defs>
           <clipPath id="coupe-mask" clipPathUnits="objectBoundingBox"
             // transform="scale(0.00228310502, 0.00467289719)"
-            transform="scale(0.00224719101, 0.00460829493)"
+            transform="scale(0.00228310502, 0.00467289719)"
+            data-width="437.46" data-height="213.5"
             fill="#fff">
-            {/* transform = scale is 1/506, 1/217 -- for clippath responsiveness */}
+            {/* transform = scale is 1/438, 1/214 -- for clippath responsiveness */}
             {/* <path d="M219 213.5C-10 213.5 -34.4789 117.687 33.9997 0H405
             C472.5 119 447.999 213.5 219 213.5Z"/> */}
-            <path d="M33.9999 1C-70 186.5 97.9999 218 224 218 
-            M224 218C350 218 518 186.5 414 1 L33.9999 1 "
+            <path d="M219 213.5C-10 213.5 -34.4789 117.687 33.9997 0H405
+            C472.5 119 447.999 213.5 219 213.5Z"
             />
 
           </clipPath>
@@ -28,9 +29,6 @@ const Coupe = (props: drinkSchemaOutput["glass"]) => {
 
       {/* Svg for the glass to display */}
       <svg id="coupe-svg" width="100%" height="100%" viewBox="0 0 448 706" fill="none" xmlns="http://www.w3.org/2000/svg"
-      // style={{
-      //   aspectRatio: "506/706",
-      // }}
       >
         <path d="M33.9999 1C-70 186.5 97.9999 218 224 218M224 218
         L223.863 637.073C223.861 645.057 217.967 651.758 210.114 653.197
