@@ -12,19 +12,19 @@ const Hurricane = (props: drinkSchemaOutput["glass"]) => {
         xmlnsXlink="http://www.w3.org/1999/xlink" height="0" width="0">
         <defs>
           <clipPath id="hurricane-mask" clipPathUnits="objectBoundingBox"
-            transform="scale(0.00396825396, 0.00169491525)"
+            transform="scale(0.00409836065, 0.00170068027)"
+            data-width="244" data-height="588"
             fill="#fff">
             {/* transform = scale is 1/252, 1/590 -- for clippath responsiveness */}
             <path
-              d="M1 1C127 109 -125 591.5 127 591.5M127 591.5
-               M127 591.5C379 591.5 127 109 253 1 L1 1"
+              d="M0 0C123 109.5 -125 588 122 588C369 588 121 109.5 244 0H0Z"
             />
           </clipPath>
         </defs>
       </svg>
 
       {/* Svg for the glass to display */}
-      <svg id="hurricane-svg" width="100%" height="100%" viewBox="0 0 252 706" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg id="hurricane-svg" width="100%" height="100%" viewBox="0 0 254 707" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M1 1C127 109 -125 591.5 127 591.5M127 591.5L126.879 677.088
           C126.867 685.066 120.979 692.013 113.003 692.146
