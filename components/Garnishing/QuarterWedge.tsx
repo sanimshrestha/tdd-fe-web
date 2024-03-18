@@ -3,26 +3,7 @@ import { motion, useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { GarnishingProps } from ".";
 import { garnishingPlacements } from "./garnishingPlacements";
-
-const animationStages = [
-  {
-    opacity: 0,
-    x: '-25%',
-    y: '135%',
-    scale: 0.1,
-    rotate: -45,
-  },
-  {
-    opacity: 1,
-    x: '0%',
-    y: '0%',
-    scale: 1,
-    rotate: 10,
-  },
-  {
-    rotate: 0,
-  }
-]
+import animationStages from "./animations";
 
 const QuarterWedge = (props: GarnishingProps) => {
   const { animate: showAnimation, garnishing, glass } = props;
@@ -38,7 +19,8 @@ const QuarterWedge = (props: GarnishingProps) => {
   useEffect(() => {
     if (!showAnimation) return;
     (async () => {
-      await animate(scope.current, animationStages[1], { duration: 0.4 });
+      await animate(scope.current, animationStages[1],
+        { duration: 0.4, delay: 0.3 });
 
       animate(scope.current, animationStages[2], {
         type: 'spring',
@@ -62,8 +44,6 @@ const QuarterWedge = (props: GarnishingProps) => {
 
   return (
     <motion.div
-      ref={scope}
-      initial={showAnimation ? animationStages[0] : animationStages[2]}
       style={{ top: `${topPos}%`, left: `${leftPos}%` }}
       className="absolute pointer-events-none w-[24.6%]" //124/504 = 24.6%
     >
@@ -73,7 +53,10 @@ const QuarterWedge = (props: GarnishingProps) => {
             `translate(${translateX || "-50%"}, ${translateY || "-50%"}) 
             rotate(${rotation}deg)`
         }}>
-        <svg width="100%" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <motion.svg width="100%" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg"
+          ref={scope}
+          initial={showAnimation ? animationStages[0] : animationStages[2]}
+        >
           <g clipPath="url(#clip0_1_396)">
             <path d="M124 124C124 92.461 111.982 62.1071 90.3921 39.1162
             C68.8022 16.1252 39.2628 2.22504 7.78603 0.244686
@@ -87,7 +70,7 @@ const QuarterWedge = (props: GarnishingProps) => {
               <rect width="124" height="124" fill="white" />
             </clipPath>
           </defs>
-        </svg>
+        </motion.svg>
       </div>
 
     </motion.div >

@@ -4,27 +4,7 @@ import { motion, useAnimate } from "framer-motion";
 import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { GarnishingProps } from ".";
 import { garnishingPlacements } from "./garnishingPlacements";
-
-const animationStages = [
-  {
-    opacity: 0,
-    x: '-25%',
-    y: '135%',
-    scale: 0.1,
-    rotate: -45,
-  },
-  {
-    opacity: 1,
-    x: '0%',
-    y: '0%',
-    scale: 1,
-    rotate: 10,
-  },
-  {
-    rotate: 0,
-  }
-]
-
+import animationStages from "./animations";
 
 const Cherry = (props: GarnishingProps) => {
   const { animate: showAnimation, garnishing, glass } = props;
@@ -40,7 +20,8 @@ const Cherry = (props: GarnishingProps) => {
   useEffect(() => {
     if (!showAnimation) return;
     (async () => {
-      await animate(scope.current, animationStages[1], { duration: 0.4 });
+      await animate(scope.current, animationStages[1],
+        { duration: 0.4, delay: 0.3 });
 
       animate(scope.current, animationStages[2], {
         type: 'spring',
@@ -65,8 +46,6 @@ const Cherry = (props: GarnishingProps) => {
 
   return (
     <motion.div
-      ref={scope}
-      initial={showAnimation ? animationStages[0] : animationStages[2]}
       style={{ top: `${topPos}%`, left: `${leftPos}%` }}
       className="absolute pointer-events-none w-[24.6%] z-10" //124/504 = 24.6%
     >
@@ -76,14 +55,17 @@ const Cherry = (props: GarnishingProps) => {
             `translate(${translateX || "-50%"}, ${translateY || "-50%"}) 
             rotate(${rotation}deg)`
         }}>
-        <svg width="100%" viewBox="0 0 124 124" xmlns="http://www.w3.org/2000/svg">
+        <motion.svg width="100%" viewBox="0 0 124 124" xmlns="http://www.w3.org/2000/svg"
+          ref={scope}
+          initial={showAnimation ? animationStages[0] : animationStages[2]}
+        >
           <circle
             cx="62" cy="62" r="32"
             fill={fill}
             stroke={strokeColor}
             strokeWidth={strokeWidth}
           />
-        </svg>
+        </motion.svg>
       </div>
     </motion.div >
   );

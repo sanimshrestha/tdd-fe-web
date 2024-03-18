@@ -3,27 +3,7 @@ import { motion, useAnimate } from "framer-motion";
 import { useEffect } from "react";
 import { GarnishingProps } from ".";
 import { garnishingPlacements } from "./garnishingPlacements";
-
-const animationStages = [
-  {
-    opacity: 0,
-    x: '-25%',
-    y: '135%',
-    scale: 0.1,
-    rotate: -45,
-  },
-  {
-    opacity: 1,
-    x: '0%',
-    y: '0%',
-    scale: 1,
-    rotate: 10,
-  },
-  {
-    rotate: 0,
-  }
-]
-
+import animationStages from "./animations";
 
 const Rind = (props: GarnishingProps) => {
   const { animate: showAnimation, garnishing, glass } = props;
@@ -39,7 +19,8 @@ const Rind = (props: GarnishingProps) => {
   useEffect(() => {
     if (!showAnimation) return;
     (async () => {
-      await animate(scope.current, animationStages[1], { duration: 0.4 });
+      await animate(scope.current, animationStages[1],
+        { duration: 0.4, delay: 0.3 });
 
       animate(scope.current, animationStages[2], {
         type: 'spring',
@@ -63,8 +44,6 @@ const Rind = (props: GarnishingProps) => {
 
   return (
     <motion.div
-      ref={scope}
-      initial={showAnimation ? animationStages[0] : animationStages[2]}
       style={{ top: `${topPos}%`, left: `${leftPos}%` }}
       className="absolute pointer-events-none w-[24.6%] z-10" //124/504 = 24.6%
     >
@@ -74,9 +53,10 @@ const Rind = (props: GarnishingProps) => {
             `translate(${translateX || "-50%"}, ${translateY || "-50%"}) 
             rotate(${rotation}deg)`
         }}>
-        <svg width="100%" viewBox="0 0 124 248" xmlns="http://www.w3.org/2000/svg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="124" height="248" viewBox="0 0 12 124" fill="none">
-          </svg>
+        <motion.svg width="100%" viewBox="0 0 124 248" xmlns="http://www.w3.org/2000/svg"
+          ref={scope}
+          initial={showAnimation ? animationStages[0] : animationStages[2]}
+        >
           <path
             d="M81.3839 1.20047C59.6099 1.20047 41.8827 10.1185 34.3296 23.4995
           C32.8164 34.0402 38.9728 47.1967 57.5381 60.9815
@@ -107,7 +87,7 @@ const Rind = (props: GarnishingProps) => {
             stroke={strokeColor}
             strokeWidth={strokeWidth}
           />
-        </svg>
+        </motion.svg>
       </div>
     </motion.div >
   );
