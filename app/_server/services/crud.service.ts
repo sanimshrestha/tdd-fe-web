@@ -112,11 +112,11 @@ export const getAllItems = async <T extends Document>(
     result = outputSchema.parse(result);
     return NextResponse.json(result);
   } catch (e) {
-    console.log(e);
     return NextResponse.json(
       {
         error: `Something went wrong while retrieving all 
                 ${model.modelName.toLowerCase()}`,
+        e: e,
       },
       { status: 500 }
     );
@@ -164,11 +164,12 @@ export async function deleteItem<T extends Document>(
       );
     return NextResponse.json({ message: `${model.modelName} deleted` });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return NextResponse.json(
       {
         error: `Something went wrong while deleting a 
         ${model.modelName.toLowerCase()}`,
+        e: e,
       },
       { status: 500 }
     );

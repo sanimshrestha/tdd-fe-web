@@ -1,4 +1,4 @@
-import mongoose, { connect } from "mongoose";
+import { connect } from "mongoose";
 import type _mongoose from "mongoose";
 import z from "zod";
 import DrinkModel from "./models/drink.model";
