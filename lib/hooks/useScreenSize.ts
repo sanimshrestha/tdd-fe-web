@@ -1,9 +1,11 @@
+'use client'
 import { useState, useEffect } from 'react';
 
 const useScreenSize = () => {
+  
   const [screenSize, setScreenSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: typeof window === 'undefined'? 0: window.innerWidth,
+    height: typeof window === 'undefined'? 0:window.innerHeight,
   });
 
   useEffect(() => {
@@ -14,11 +16,15 @@ const useScreenSize = () => {
       });
     };
 
-    window.addEventListener('resize', handleResize);
+    if(typeof window != 'undefined'){
+      window.addEventListener('resize', handleResize);
+    }
 
     // Clean up the event listener when the component unmounts
     return () => {
-      window.removeEventListener('resize', handleResize);
+      if(typeof window != 'undefined'){
+        window.removeEventListener('resize', handleResize);
+      }
     };
   }, []);
 

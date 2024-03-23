@@ -1,5 +1,2 @@
-//robots.txt
-
-# Block all crawlers for /accounts
-User-agent: *
-Disallow: /drinks/
+user-agent: *
+disallow: /drinks/

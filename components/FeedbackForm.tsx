@@ -29,13 +29,6 @@ import { setFeedbackDialogOpen, uiState } from "@redux/features/ui"
 import { useToast } from "./ui/use-toast"
 import MessageSmileSquare from "@icons/MessageSmileSquare"
 
-declare global {
-  interface Window {
-    toasttest: () => void;
-  }
-}
-
-
 export function FeedbackForm({ children }: { children?: React.ReactNode }) {
   const [createFeedback] = useCreateFeedbackMutation();
   const feedbackDialogOpen = useAppSelector<uiState['feedbackDialogOpen']>

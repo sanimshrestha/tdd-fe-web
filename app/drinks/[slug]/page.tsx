@@ -23,6 +23,7 @@ const Drink = ({ params }: { params: { slug: string } }) => {
   }, [dispatch, drink]);
 
   const onShare = () => {
+    if (typeof window === 'undefined') return
     if (navigator.share) {
       navigator.share({
         title: "The Drinks Diary",

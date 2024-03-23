@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 import useScreenSize from "@/lib/hooks/useScreenSize";
 import { clamp } from "@/lib/utils";
 import { drinkGrid } from "@/lib/constants";
+import { Skeleton } from "../ui/skeleton";
 
 const DrinkMaker = ({ drink, thumbnail = false }:
-  { drink: drinkSchemaOutput, thumbnail?: boolean }) => {
+  { drink?: drinkSchemaOutput, thumbnail?: boolean }) => {
   const [dimensions, setdimensions] = useState(drinkGrid.dimensionsPx);
   const screenSize = useScreenSize();
 
@@ -27,41 +28,40 @@ const DrinkMaker = ({ drink, thumbnail = false }:
   }, [thumbnail, screenSize]);
 
   return (
-    <div className="drinkmaker relative flex flex-col justify-end"
-      style={{
-        width: `${dimensions.width}px`,
-        height: `${dimensions.height}px`,
-      }} >
-      {drink.glass && drink.ingredients &&
-        <>
-          <div className="relative mx-auto"
-            style={{
-              width: `${drink.glass.width}%`,
-              height: `${drink.glass.height}%`,
-            }}
-          >
-            <DrinkStack
-              ingredients={drink.ingredients}
-              glass={drink.glass}
+    !drink
+      ? <Skeleton className="h-[400px] w-[320px] max-w-[90%] pt-6" />
+      : <div className="drinkmaker relative flex flex-col justify-end"
+        style={{
+          width: `${dimensions.width}px`,
+          height: `${dimensions.height}px`,
+        }} >
+
+        <div className="relative mx-auto"
+          style={{
+            width: `${drink.glass.width}%`,
+            height: `${drink.glass.height}%`,
+          }}
+        >
+          <DrinkStack
+            ingredients={drink.ingredients}
+            glass={drink.glass}
+            animate={!thumbnail}
+          />
+          {drink.accessory &&
+            <Accessory {...drink.accessory}
               animate={!thumbnail}
-            />
-            {drink.accessory &&
-              <Accessory {...drink.accessory}
-                animate={!thumbnail}
-              />}
-            <Glass {...drink.glass} />
-          </div >
-          {drink.garnishing?.map((garnishing) =>
-            <Garnishing
-              key={garnishing.name}
-              garnishing={garnishing}
-              // {...garnishing}
-              glass={drink.glass}
-              animate={!thumbnail} />
-          )}
-        </>
-      }
-    </div>
+            />}
+          <Glass {...drink.glass} />
+        </div >
+        {drink.garnishing?.map((garnishing) =>
+          <Garnishing
+            key={garnishing.name}
+            garnishing={garnishing}
+            // {...garnishing}
+            glass={drink.glass}
+            animate={!thumbnail} />
+        )}
+      </div>
   )
 };
 

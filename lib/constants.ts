@@ -10,6 +10,7 @@ export const images = {
 };
 
 export const metadatajson: Metadata = {
+  metadataBase: new URL("https://thedrinksdiary.com/"),
   title: constants.productTitle,
   description: constants.productDescription,
   generator: "Next.js",
@@ -36,7 +37,7 @@ export const metadatajson: Metadata = {
     siteName: constants.productTitle,
     images: [
       {
-        url: "https://tdd-fe-web.vercel.app/og-img.png",
+        url: "/og-img.png",
         width: 1200,
         height: 630,
       },
@@ -49,7 +50,7 @@ export const metadatajson: Metadata = {
     description: constants.productDescription,
     images: [
       {
-        url: "https://tdd-fe-web.vercel.app/og-img.png",
+        url: "/og-img.png",
         width: 1200,
         height: 630,
       },
