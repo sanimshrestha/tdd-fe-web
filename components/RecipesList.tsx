@@ -1,7 +1,9 @@
 'use client'
-import React from "react"
-import RecipeCard from "./RecipeCard"
-import { useGetDrinksQuery } from "@redux/services/drinks"
+import { setDrinks } from "@/redux/features/drinks";
+import { useAppDispatch } from "@/redux/hooks";
+import { useGetDrinksQuery } from "@redux/services/drinks";
+import { useEffect } from "react";
+import RecipeCard from "./RecipeCard";
 import { Skeleton } from "./ui/skeleton";
 // import {
 //   Pagination,
@@ -15,6 +17,12 @@ import { Skeleton } from "./ui/skeleton";
 
 const RecipesList = () => {
   const { data: allDrinks, isLoading } = useGetDrinksQuery()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (!allDrinks) return;
+    dispatch(setDrinks(allDrinks))
+  }, [dispatch, allDrinks]);
 
   return (
     <div className="flex flex-col p-8 gap-8">

@@ -87,3 +87,39 @@ main {
 .cmdk-empty + .cmdk-search-list .cmdk-footer {
   display: none;
 }
+
+.recipe-card .glow-filter{
+  display: none;
+}
+.recipe-card .drinkmaker{
+  transition: transform 300ms;
+  transform: scale(1);
+}
+.recipe-card .drinkmaker:has(.drinkstack-container:hover) .glow-filter{
+  display: block;
+}
+
+.recipe-card .drinkmaker:has(.drinkstack-container:hover){
+  transform: scale(1.1);
+}
+.recipe-card .drinkmaker:has(.drinkstack-container:hover) .shadow-base{
+  opacity: 0;
+}
+
+@supports not (selector(.recipe-card .drinkmaker:has(.drinkstack-container:hover))) {
+  .recipe-card .drinkmaker:hover .glow-filter{
+    display: block;
+  } 
+
+  .recipe-card .drinkmaker:hover{
+    transform: scale(1.1);
+  }
+  .recipe-card .drinkmaker:hover .shadow-base{
+    opacity: 0;
+  }
+}
+
+/* Not working in local so hard adding */
+/* .__variable_866216 {
+  --font-sans: "__Lexend_866216", "__Lexend_Fallback_866216";
+} */

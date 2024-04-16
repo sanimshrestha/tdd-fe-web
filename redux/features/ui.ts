@@ -1,5 +1,5 @@
-import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { setCurrentDrink } from "./drinks";
 
 export type uiState = {
   recentDrinks: {
@@ -21,7 +21,15 @@ export const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    setRecentDrink: (state, action: PayloadAction<drinkSchemaOutput>) => {
+    setFeedbackDialogOpen: (state, action: PayloadAction<boolean>) => {
+      state.feedbackDialogOpen = action.payload;
+    },
+    setCommandDialogOpen: (state, action: PayloadAction<boolean>) => {
+      state.commandDialogOpen = action.payload;
+    },
+  },
+  extraReducers(builder) {
+    builder.addCase(setCurrentDrink, (state, action) => {
       const slugIndex = state.recentDrinks
         .map((drink) => drink.slug)
         .indexOf(action.payload.slug);
@@ -38,17 +46,10 @@ export const uiSlice = createSlice({
       if (state.recentDrinks.length > 3) {
         state.recentDrinks.pop();
       }
-    },
-    setFeedbackDialogOpen: (state, action: PayloadAction<boolean>) => {
-      state.feedbackDialogOpen = action.payload;
-    },
-    setCommandDialogOpen: (state, action: PayloadAction<boolean>) => {
-      state.commandDialogOpen = action.payload;
-    },
+    });
   },
 });
 export const { 
-  setRecentDrink, 
   setFeedbackDialogOpen, 
   setCommandDialogOpen } = uiSlice.actions;
 export default uiSlice.reducer;

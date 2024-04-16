@@ -1,25 +1,28 @@
 'use client'
+import { setCurrentDrink } from "@/redux/features/drinks";
 import DrinkMaker from "@components/DrinkMaker/DrinkMaker";
 import IngredientFooter from "@components/IngredientFooter";
+import { CaretLeftIcon, CaretRightIcon, Share1Icon }
+  from "@radix-ui/react-icons";
+import { useAppDispatch } from "@redux/hooks";
+import { useGetDrinkWithPrevNextQuery } from "@redux/services/drinks";
 import { Button } from "@ui/button";
 import { Skeleton } from "@ui/skeleton";
 import { useToast } from "@ui/use-toast";
-import { setRecentDrink } from "@redux/features/ui";
-import { useAppDispatch } from "@redux/hooks";
-import { useGetDrinkBySlugQuery } from "@redux/services/drinks";
-import { Share1Icon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import { useEffect } from "react";
 
-
 const Drink = ({ params }: { params: { slug: string } }) => {
-  const { data: drink, isLoading, isFetching } =
-    useGetDrinkBySlugQuery(params.slug);
+  const { data, isLoading, isFetching } =
+    useGetDrinkWithPrevNextQuery(params.slug);
+  const { drink, prevDrink, nextDrink } = data || {};
+
   const { toast } = useToast()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (!drink) return;
-    dispatch(setRecentDrink(drink))
+    dispatch(setCurrentDrink(drink))
   }, [dispatch, drink]);
 
   const onShare = () => {
@@ -40,58 +43,68 @@ const Drink = ({ params }: { params: { slug: string } }) => {
   }
 
   return (
-    <div className="flex flex-col gap-4 grow items-center 
-    justify-between overflow-x-hidden">
-      <section className="flex flex-col justify-center items-center gap-2">
-        {isLoading ?
-          <>
-            <Skeleton className="h-8 w-32 mt-4" />
-            <Skeleton className="h-7 w-40" />
-          </>
-          : (
+    <>
+      {prevDrink &&
+        <Link
+          className="absolute left-0 top-1/2 text-muted-placeholder
+                      transform -translate-y-1/2 ml-8"
+          href={`/drinks/${prevDrink.slug}`}>
+          <CaretLeftIcon width="2rem" height="2rem" />
+        </Link>}
+      <div className="flex flex-col w-fit lg:max-w-4xl mx-auto
+                    lg:grid lg:grid-cols-2 mt-5
+                    gap-4 grow items-center justify-between 
+                    lg:place-content-center lg:place-items-center"
+        style={{
+          gridTemplateAreas:
+            "'drinkmaker drinkdetails' 'drinkmaker ingredients'"
+        }}>
+        <section className="flex flex-col justify-center items-center gap-2
+                            w-fit lg:mx-8 z-10"
+          style={{
+            gridArea: "drinkdetails",
+          }} >
+          {isLoading ?
             <>
-              <h2 className="font-bold text-foreground mt-4 text-xl 
-                      leading-5 tracking-tighter">
-                {drink?.name}
-              </h2>
-              <p className="text-muted-foreground text-base 
-                              leading-5 tracking-tight">
-                {drink?.drinkCategory?.name}
-              </p>
-              <Button
-                variant={"secondary"}
-                className="py-2 px-3 mt-1"
-                onClick={onShare}>
-                <Share1Icon />
-                <span className="ml-2 text-sm font-semibold px-0.5">
-                  Share recipe
-                </span>
-              </Button>
+              <Skeleton className="ml-4 h-8 w-32 mt-4" />
+              <Skeleton className="ml-4 h-7 w-48" />
+              <Skeleton className="ml-4 h-10 w-32" />
             </>
-          )
-        }
-      </section>
-      {isLoading ?
-        (<>
-          <Skeleton className="h-[400px] w-[320px] max-w-[90%] pt-6" />
-          <div className="flex flex-col gap-4 p-2 items-center">
-            <Skeleton className="h-7 w-36" />
-            <div className="flex gap-4">
-              <Skeleton className="h-16 w-16" />
-              <Skeleton className="h-16 w-16" />
-              <Skeleton className="h-16 w-16" />
-            </div>
-          </div>
-        </>)
-        : (
-          drink &&
-          <>
-            <DrinkMaker drink={drink} />
-            <IngredientFooter drink={drink} />
-          </>
-        )
+            : drink && (
+              <>
+                <h2 className="font-bold text-foreground mt-4 text-xl 
+                      leading-5 tracking-tighter">
+                  {drink?.name}
+                </h2>
+                <p className="text-muted-foreground text-base 
+                              leading-5 tracking-tight">
+                  {drink?.drinkCategory?.name}
+                </p>
+                <Button
+                  variant={"secondary"}
+                  className="py-2 px-3 mt-1"
+                  onClick={onShare}>
+                  <Share1Icon />
+                  <span className="ml-2 text-sm font-semibold px-0.5">
+                    Share recipe
+                  </span>
+                </Button>
+              </>
+            )
+          }
+        </section>
+        <DrinkMaker drink={drink} />
+        <IngredientFooter drink={drink} />
+      </div>
+      {nextDrink &&
+        <Link
+          className="absolute right-0 top-1/2 text-muted-placeholder
+                    transform -translate-y-1/2 mr-8"
+          href={`/drinks/${nextDrink.slug}`}>
+          <CaretRightIcon width="2rem" height="2rem" />
+        </Link>
       }
-    </div>
+    </>
   );
 };
 

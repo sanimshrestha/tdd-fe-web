@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 import "@/styles/globals.css"
 
-import { Lexend as FontSans } from 'next/font/google'
+import { Lexend } from 'next/font/google'
 import { cn } from "@/lib/utils"
 import Script from 'next/script'
 import { constants } from '@/lib/constants'
 import StoreProvider from './StoreProvider'
 import { Toaster } from '@ui/toaster'
 
-export const fontSans = FontSans({
+export const fontSans = Lexend({
   subsets: ["latin"],
   variable: "--font-sans",
 })
@@ -24,7 +24,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className='h-full' suppressHydrationWarning>
+    <html lang="en"
+      className={cn(
+        "h-full font-sans",
+        fontSans.variable
+      )}
+      suppressHydrationWarning>
       {/* Clarity Script */}
       <Script strategy="lazyOnload" id="clarity-script">
         {`
@@ -36,10 +41,7 @@ export default function RootLayout({
         `}
       </Script>
       <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased flex flex-col",
-          fontSans.variable
-        )}
+        className="min-h-screen bg-background antialiased flex flex-col"
         suppressHydrationWarning>
         <StoreProvider>
           <div className='min-h-screen flex flex-col justify-between'>

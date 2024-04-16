@@ -13,6 +13,7 @@ const Footer = () => {
         width={172}
         height={96}
         alt="TDD logo"
+        priority
         className="max-w-[80px]"
       />
       {/* <div className="flex flex-col md:flex-row gap-2 md:gap-8 
