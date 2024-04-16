@@ -134,26 +134,24 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
 
   return (
     <>
-      {animate &&
-        <>
-          {/* duplicate the drink stack for the background for glow effect */}
-          {getStack(true)}
-          {/* The glow div applying backdropFilter to previous div block */}
-          <div
-            className="absolute bottom-0 left-0 pointer-events-none 
+      {/* duplicate the drink stack for the background for glow effect */}
+      {getStack(true)}
+      {/* The glow div applying backdropFilter to previous div block */}
+      <div
+        className="glow-filter absolute bottom-0 left-0 pointer-events-none 
                     opacity-40 scale-150 transition-[backdrop-filter] 
                     duration-300"
-            style={{
-              height: `calc(${drinkContainerHeightPercent}% - 
+        style={{
+          height: `calc(${drinkContainerHeightPercent}% - 
                     ${strokeWidth}px)`,
-              // width: `calc(100% - ${2 * (gap + strokeWidth)}px)`,
-              width: '100vw',
-              top: `${strokeWidth}px`,
-              backdropFilter: `blur(${blur}px)`,
-              left: `calc(-1 * (100vw - 100%) / 2)`
-            }}>
-          </div>
-        </>}
+          // width: `calc(100% - ${2 * (gap + strokeWidth)}px)`,
+          // width: '100vw',
+          width: '150%',
+          top: `${strokeWidth}px`,
+          backdropFilter: `blur(${blur}px)`,
+          // left: `calc(-1 * (100vw - 100%) / 2)`
+        }}>
+      </div>
       {/* Actual drink stack to display */}
       {getStack()}
     </>

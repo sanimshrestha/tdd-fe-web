@@ -29,13 +29,15 @@ const drinkSchemaInput = object({
     required_error: "Drink slug is required",
   }).min(1),
   drinkCategory: ObjectIdSchema.shape._id.optional(),
-  method: ObjectIdSchema.shape._id,
+  method: ObjectIdSchema.shape._id.optional(),
+  customMethod: string().optional(),
   glass: ObjectIdSchema.shape._id,
   accessory: ObjectRefPositionSchema.optional(),
   garnishing:  array(ObjectRefPositionSchema.extend({
     rotation: string(),
     placement: string(),
   })).optional(),
+  garnishingInstructions: array(string()).optional(),
   ingredients: array(DrinkIngredientInputSchema),
 });
 
@@ -77,10 +79,12 @@ export const drinkSchemaOutput = ObjectIdNameSchema.extend({
     required_error: "Drink slug is required",
   }).min(1),
   drinkCategory: DrinkCategorySchema.optional(),
-  method: MethodSchema,
+  method: MethodSchema.optional(),
+  customMethod: string().optional(),
   glass: GlassSchema,
   accessory: DrinkAccessoryOutputSchema.optional(),
   garnishing: array(DrinkGarnishingOutputSchema).optional(),
+  garnishingInstructions: array(string()).optional(),
   ingredients: array(DrinkIngredientOutputSchema),
 });
 

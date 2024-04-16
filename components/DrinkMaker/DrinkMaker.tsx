@@ -1,42 +1,69 @@
 'use client'
-import DrinkStack from "../DrinkStack/DrinkStack";
-import Accessory from "../Accessory";
-import Garnishing from "../Garnishing";
-import Glass from "../Glass";
-import { drinkSchemaOutput } from "@server/schema/drink.schema";
-import { useEffect, useState } from "react";
+import { drinkGrid, drinkGridMobile } from "@/lib/constants";
 import useScreenSize from "@/lib/hooks/useScreenSize";
 import { clamp } from "@/lib/utils";
-import { drinkGrid } from "@/lib/constants";
+import { drinkSchemaOutput } from "@server/schema/drink.schema";
+import { useEffect, useState } from "react";
+import Accessory from "../Accessory";
+import DrinkStack from "../DrinkStack/DrinkStack";
+import Garnishing from "../Garnishing";
+import Glass from "../Glass";
 import { Skeleton } from "../ui/skeleton";
 
 const DrinkMaker = ({ drink, thumbnail = false }:
   { drink?: drinkSchemaOutput, thumbnail?: boolean }) => {
-  const [dimensions, setdimensions] = useState(drinkGrid.dimensionsPx);
+  const [dimensions, setdimensions] = useState({
+    width: (thumbnail ? 0.45 : 1) * drinkGrid.dimensionsPx.width,
+    height: (thumbnail ? 0.45 : 1) * drinkGrid.dimensionsPx.height,
+  });
   const screenSize = useScreenSize();
 
   useEffect(() => {
     if (screenSize.height > 0) {
-      const height = thumbnail ? 320
-        : clamp(screenSize.height * drinkGrid.suggestedGlassHeight,
-          drinkGrid.minGlassHeightPx, drinkGrid.dimensionsPx.height);
+      let height = 0;
+      let width = 0;
+      if (screenSize.width < 768) {
+        height = thumbnail ? 320
+          : clamp(
+            screenSize.height * drinkGridMobile.suggestedGlassHeight,
+            drinkGridMobile.minGlassHeightPx,
+            drinkGridMobile.dimensionsPx.height);
 
-      const width = height *
-        (drinkGrid.dimensionsPx.width / drinkGrid.dimensionsPx.height);
+        width = height *
+          (drinkGridMobile.dimensionsPx.width
+            / drinkGridMobile.dimensionsPx.height);
+      }
+      else {
+        height = thumbnail ? 320
+          : clamp(screenSize.height * drinkGrid.suggestedGlassHeight,
+            drinkGrid.minGlassHeightPx, drinkGrid.dimensionsPx.height);
+
+        width = height *
+          (drinkGrid.dimensionsPx.width / drinkGrid.dimensionsPx.height);
+      }
+
       setdimensions({ width, height });
     }
   }, [thumbnail, screenSize]);
 
   return (
     !drink
-      ? <Skeleton className="h-[400px] w-[320px] max-w-[90%] pt-6" />
-      : <div className="drinkmaker relative flex flex-col justify-end"
+      ? <Skeleton className="h-[400px] w-[320px] max-w-[90%] pt-6 
+                              lg:justify-self-end lg:self-start"
+        style={{
+          gridArea: "drinkmaker",
+        }} />
+      : <div className="drinkmaker relative lg:sticky lg:top-40 
+                        flex flex-col mt-8 lg:mt-5
+                        justify-end lg:justify-self-end lg:self-start"
         style={{
           width: `${dimensions.width}px`,
           height: `${dimensions.height}px`,
+          gridArea: "drinkmaker",
+          transformOrigin: `center ${100 - (drink.glass.height / 2)}%`
         }} >
 
-        <div className="relative mx-auto"
+        <div className="relative mx-auto drinkstack-container"
           style={{
             width: `${drink.glass.width}%`,
             height: `${drink.glass.height}%`,
@@ -53,15 +80,31 @@ const DrinkMaker = ({ drink, thumbnail = false }:
             />}
           <Glass {...drink.glass} />
         </div >
-        {drink.garnishing?.map((garnishing) =>
-          <Garnishing
-            key={garnishing.name}
-            garnishing={garnishing}
-            // {...garnishing}
-            glass={drink.glass}
-            animate={!thumbnail} />
-        )}
-      </div>
+        <div
+          className={`shadow-base w-full h-12 absolute -bottom-4 left-0
+                    ${thumbnail ? 'opacity-100' : 'opacity-0'} 
+                    transition-opacity duration-300
+                    pointer-events-none`}
+          style={{
+            background: `linear-gradient(#00000000 0%, #0c111dc4 60%,
+              #0c111d 100%)`,
+            zIndex: 11,
+            // height: `${drink.glass.height * 0.2}%`
+          }}
+        >
+
+        </div>
+        {
+          drink.garnishing?.map((garnishing) =>
+            <Garnishing
+              key={garnishing.name}
+              garnishing={garnishing}
+              // {...garnishing}
+              glass={drink.glass}
+              animate={!thumbnail} />
+          )
+        }
+      </div >
   )
 };
 

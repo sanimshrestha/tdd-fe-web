@@ -64,6 +64,14 @@ export const drinkGrid = {
   height: 704,
 },
 minGlassHeightPx: 250,
+suggestedGlassHeight: 0.55,
+};
+export const drinkGridMobile = {
+  dimensionsPx:{
+  width: 504,
+  height: 704,
+},
+minGlassHeightPx: 250,
 suggestedGlassHeight: 0.45,
 };
 

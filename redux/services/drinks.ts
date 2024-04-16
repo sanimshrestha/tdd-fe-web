@@ -16,10 +16,29 @@ export const drinkApi = createApi({
     getDrinkBySlug: builder.query<drinkSchemaOutput, string>({
       query: (slug) => `drinks/${slug}`,
     }),
+    getDrinkWithPrevNext: builder.query<{
+      drink: drinkSchemaOutput;
+      prevDrink: drinkSchemaOutput;
+      nextDrink: drinkSchemaOutput;
+    }, string>({
+      query: (slug) => `drinks/${slug}/withPrevNext`,
+      transformResponse: (response:{
+        currentItem: drinkSchemaOutput;
+        previousItems: drinkSchemaOutput[];
+        nextItems: drinkSchemaOutput[];
+      }) => {
+        return {
+          drink: response.currentItem,
+          prevDrink: response.previousItems[0],
+          nextDrink: response.nextItems[0],
+        };
+      }
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetDrinksQuery, useGetDrinkBySlugQuery } = drinkApi;
+export const { useGetDrinksQuery, useGetDrinkBySlugQuery,
+   useGetDrinkWithPrevNextQuery } = drinkApi;
 export default drinkApi;

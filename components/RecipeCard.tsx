@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils"
 
 import { drinkSchemaOutput } from "@server/schema/drink.schema"
-import DrinkMaker from "./DrinkMaker/DrinkMaker"
 import { useRouter } from "next/navigation"
+import DrinkMaker from "./DrinkMaker/DrinkMaker"
 import {
   Card,
   CardContent,
@@ -20,7 +20,8 @@ const RecipeCard = ({ className, drink, ...props }:
   return (
     <Card
       className={
-        cn("recipe-card w-[384px] max-w-[90%] pt-12 cursor-pointer",
+        cn("bg-background recipe-card w-[384px] max-w-[90%] \
+         pt-12 cursor-pointer",
           className)}
       {...props}
       onClick={() => { router.push(`/drinks/${drink.slug}`) }}
@@ -31,7 +32,8 @@ const RecipeCard = ({ className, drink, ...props }:
           <DrinkMaker drink={drink} thumbnail={true} />
         </div>
       </CardContent>
-      <CardFooter className="flex flex-col gap-2 text-center">
+      <CardFooter className="flex flex-col gap-2 text-center mt-6 
+                              relative z-10">
         <CardTitle>{drink.name}</CardTitle>
         <CardDescription className="h-5">
           {drink.drinkCategory?.name}

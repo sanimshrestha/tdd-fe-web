@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { drinkApi } from "./services/drinks";
 import ui from "./features/ui";
+import drinks from "./features/drinks";
 import feedbackApi from "./services/feedbacks";
 
 export const makeStore = () => {
@@ -9,6 +10,7 @@ export const makeStore = () => {
       [drinkApi.reducerPath]: drinkApi.reducer,
       [feedbackApi.reducerPath]: feedbackApi.reducer,
       ui,
+      drinks,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware()

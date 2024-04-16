@@ -43,6 +43,7 @@ const config = {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
+          placeholder: "hsl(var(--muted-placeholder))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
@@ -96,6 +97,9 @@ const config = {
           "clamp(1rem, 1rem + 2.5vw, 2rem)",
           "clamp(2rem, 1.5rem + 2.5vw, 3rem)",
         ],
+      },
+      flexBasis: {
+        "1/3-pad-2": "calc((100% - 2rem) / 3)",
       },
     },
   },
