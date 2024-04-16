@@ -29,7 +29,7 @@ const RecipeCard = ({ className, drink, ...props }:
       <CardContent className="flex justify-center gap-4">
         <div className="h-[320px] flex 
                         flex-col justify-end relative">
-          <DrinkMaker drink={drink} thumbnail={true} />
+          <DrinkMaker drink={drink} showShadow={true} thumbnail={true} />
         </div>
       </CardContent>
       <CardFooter className="flex flex-col gap-2 text-center mt-6 

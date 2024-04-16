@@ -82,6 +82,8 @@ const config = {
       },
       backgroundImage: {
         "command-empty-pattern": "url('/images/bg-command-empty.png')",
+        "gradient-fade": "linear-gradient(#00000000 0%, #0c111dc4 60%,\
+          #0c111d 100%)",
       },
       width: {
         "full-margin": "calc(100% - 2rem)",
