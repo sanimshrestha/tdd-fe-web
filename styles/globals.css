@@ -83,6 +83,9 @@
 main {
   overflow: hidden;
 }
+.comingsoon-container .skeleton{
+  align-self: unset;
+}
 
 .cmdk-empty + .cmdk-search-list .cmdk-footer {
   display: none;

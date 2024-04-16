@@ -10,8 +10,8 @@ import Garnishing from "../Garnishing";
 import Glass from "../Glass";
 import { Skeleton } from "../ui/skeleton";
 
-const DrinkMaker = ({ drink, thumbnail = false }:
-  { drink?: drinkSchemaOutput, thumbnail?: boolean }) => {
+const DrinkMaker = ({ drink, showShadow = false, thumbnail = false, }:
+  { drink?: drinkSchemaOutput, thumbnail?: boolean, showShadow?: boolean }) => {
   const [dimensions, setdimensions] = useState({
     width: (thumbnail ? 0.45 : 1) * drinkGrid.dimensionsPx.width,
     height: (thumbnail ? 0.45 : 1) * drinkGrid.dimensionsPx.height,
@@ -53,9 +53,9 @@ const DrinkMaker = ({ drink, thumbnail = false }:
         style={{
           gridArea: "drinkmaker",
         }} />
-      : <div className="drinkmaker relative lg:sticky lg:top-40 
-                        flex flex-col mt-8 lg:mt-5
-                        justify-end lg:justify-self-end lg:self-start"
+      : <div className={`drinkmaker relative lg:sticky lg:top-40 
+                        flex flex-col ${thumbnail ? 'mt-0' : 'mt-8 lg:mt-5 '}
+                        justify-end lg:justify-self-end lg:self-start`}
         style={{
           width: `${dimensions.width}px`,
           height: `${dimensions.height}px`,
@@ -82,12 +82,10 @@ const DrinkMaker = ({ drink, thumbnail = false }:
         </div >
         <div
           className={`shadow-base w-full h-12 absolute -bottom-4 left-0
-                    ${thumbnail ? 'opacity-100' : 'opacity-0'} 
+                    ${showShadow ? 'opacity-100' : 'opacity-0'} 
                     transition-opacity duration-300
-                    pointer-events-none`}
+                    pointer-events-none bg-gradient-fade`}
           style={{
-            background: `linear-gradient(#00000000 0%, #0c111dc4 60%,
-              #0c111d 100%)`,
             zIndex: 11,
             // height: `${drink.glass.height * 0.2}%`
           }}

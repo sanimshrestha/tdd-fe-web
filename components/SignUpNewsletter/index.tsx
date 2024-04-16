@@ -60,7 +60,7 @@ const SignUpNewsletter = () => {
 
   return (
     <div className='flex flex-col items-center gap-1 sm:gap-2 
-       w-full grow-[0.25] z-[1]'>
+                    w-full grow-[0.25] z-[1] mt-4'>
       <h2 className="text-foreground text-xl md:text-2xl 
                       leading-6 2xl:leading-10 ">
         {heading[state.status]}
