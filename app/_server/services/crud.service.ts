@@ -97,7 +97,7 @@ export async function findItemWithPrevNext<T extends Document>(
     currentItem = outputSchema.parse(currentItem);
     if(!currentItem){
       return NextResponse.json(
-        { error: `Couldn't find ${model.modelName.toLowerCase()}`, e: e, },
+        { error: `Couldn't find ${model.modelName.toLowerCase()}` },
         { status: 404 }
       );
     }
