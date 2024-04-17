@@ -37,6 +37,7 @@ export async function createItem<T>(model: Model<T>, input: T) {
         {
           error: `Something went wrong while creating a new 
                   ${model.modelName.toLowerCase()}`,
+          e: e,
         },
         { status: 500 }
       );
@@ -63,7 +64,7 @@ export async function findItemById<T extends Document>(
     return NextResponse.json(result);
   } catch (e) {
     return NextResponse.json(
-      { error: `Couldn't find ${model.modelName.toLowerCase()}` },
+      { error: `Couldn't find ${model.modelName.toLowerCase()}`, e: e },
       { status: 404 }
     );
   }
@@ -96,7 +97,7 @@ export async function findItemWithPrevNext<T extends Document>(
     currentItem = outputSchema.parse(currentItem);
     if(!currentItem){
       return NextResponse.json(
-        { error: `Couldn't find ${model.modelName.toLowerCase()}` },
+        { error: `Couldn't find ${model.modelName.toLowerCase()}`, e: e, },
         { status: 404 }
       );
     }
@@ -134,7 +135,7 @@ export async function findItemWithPrevNext<T extends Document>(
     });
   } catch (e) {
     return NextResponse.json(
-      { error: `Couldn't find ${model.modelName.toLowerCase()}` },
+      { error: `Couldn't find ${model.modelName.toLowerCase()}`, e: e },
       { status: 404 }
     );
   }
@@ -159,7 +160,7 @@ export async function findItem<T extends Document>(
     return NextResponse.json(result);
   } catch (e) {
     return NextResponse.json(
-      { error: `Couldn't find ${model.modelName.toLowerCase()}` },
+      { error: `Couldn't find ${model.modelName.toLowerCase()}`, e: e },
       { status: 404 }
     );
   }
@@ -213,6 +214,7 @@ export async function findAndUpdateItem<T extends Document>(
       {
         error: `Something went wrong while updating the 
         ${model.modelName.toLowerCase()}`,
+        e: e,
       },
       { status: 500 }
     );

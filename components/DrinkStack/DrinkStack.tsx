@@ -98,7 +98,7 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
         animate={"show"}
         style={{ height: drinkContainerHeightPercent + "%", }}
       >
-        <div className="absolute flex flex-col-reverse"
+        <div className="absolute flex flex-col justify-end"
           style={{
             clipPath: `url(#${glass.name.toLowerCase()}-mask)`,
             left: `${sideGap + strokeWidth + leftPadding}px`,

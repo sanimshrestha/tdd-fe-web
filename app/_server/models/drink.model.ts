@@ -5,7 +5,8 @@ const DrinkSchema = new Schema(
     name: { type: String, required: true },
     slug: { type: String, required: true },
     drinkCategory: { type: Schema.Types.ObjectId, ref: "DrinkCategory"},
-    method: { type: Schema.Types.ObjectId, ref: "Method", required: true },
+    method: { type: Schema.Types.ObjectId, ref: "Method"},
+    customMethod: { type: String},
     glass: { type: Schema.Types.ObjectId, ref: "Glass", required: true },
     accessory: {
       ref: { type: Schema.Types.ObjectId, ref: "Accessory" },
@@ -32,6 +33,7 @@ const DrinkSchema = new Schema(
         unit: [String],
       },
     ],
+    garnishingInstructions: [String]
   },
   {
     timestamps: true,

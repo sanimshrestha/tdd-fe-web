@@ -33,9 +33,9 @@ const drinkSchemaInput = object({
   customMethod: string().optional(),
   glass: ObjectIdSchema.shape._id,
   accessory: ObjectRefPositionSchema.optional(),
-  garnishing:  array(ObjectRefPositionSchema.extend({
-    rotation: string(),
-    placement: string(),
+  garnishing:  array(ObjectRefPositionSchema.partial().extend({
+    rotation: string().optional(),
+    placement: string().optional(),
   })).optional(),
   garnishingInstructions: array(string()).optional(),
   ingredients: array(DrinkIngredientInputSchema),
