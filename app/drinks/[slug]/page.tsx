@@ -47,7 +47,7 @@ const Drink = ({ params }: { params: { slug: string } }) => {
       {prevDrink &&
         <Link
           className="absolute left-0 top-1/2 text-muted-placeholder
-                      transform -translate-y-1/2 ml-8"
+                      transform -translate-y-1/2 ml-8 z-20"
           href={`/drinks/${prevDrink.slug}`}>
           <CaretLeftIcon width="2rem" height="2rem" />
         </Link>}
@@ -99,7 +99,7 @@ const Drink = ({ params }: { params: { slug: string } }) => {
       {nextDrink &&
         <Link
           className="absolute right-0 top-1/2 text-muted-placeholder
-                    transform -translate-y-1/2 mr-8"
+                    transform -translate-y-1/2 mr-8 z-20"
           href={`/drinks/${nextDrink.slug}`}>
           <CaretRightIcon width="2rem" height="2rem" />
         </Link>

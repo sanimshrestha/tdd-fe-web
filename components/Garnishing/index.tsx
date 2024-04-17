@@ -94,15 +94,55 @@ const Garnishing = (props: GarnishingProps) => {
 
   switch (type.toLowerCase()) {
     case "quarter wedge":
-      return <QuarterWedge {...props} {...garnishData["quarter wedge"][name]} />
+      return <QuarterWedge
+        {...{
+          ...props,
+          garnishing:
+          {
+            ...props.garnishing,
+            ...garnishData["quarter wedge"][name.toLowerCase()]
+          }
+        }} />
     case "wedge":
-      return <Wedge {...props} {...garnishData["wedge"][name]} />
+      return <Wedge
+        {...{
+          ...props,
+          garnishing:
+          {
+            ...props.garnishing,
+            ...garnishData["wedge"][name.toLowerCase()]
+          }
+        }} />
     case "cherry":
-      return <Cherry {...props} {...garnishData["cherry"][name]} />
+      return <Cherry
+        {...{
+          ...props,
+          garnishing:
+          {
+            ...props.garnishing,
+            ...garnishData["cherry"][name.toLowerCase()]
+          }
+        }} />
     case "mint":
-      return <Mint {...props} {...garnishData["mint"][name]} />
+      return <Mint
+        {...{
+          ...props,
+          garnishing:
+          {
+            ...props.garnishing,
+            ...garnishData["mint"][name.toLowerCase()]
+          }
+        }} />
     case "rind":
-      return <Rind {...props} {...garnishData["rind"][name]} />
+      return <Rind
+        {...{
+          ...props,
+          garnishing:
+          {
+            ...props.garnishing,
+            ...garnishData["rind"][name.toLowerCase()]
+          }
+        }} />
     default:
       return null;
   }

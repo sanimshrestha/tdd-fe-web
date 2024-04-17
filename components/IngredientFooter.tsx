@@ -44,11 +44,12 @@ const IngredientFooter = ({ drink }: { drink?: drinkSchemaOutput }) => {
           </div>
         </div>)
         : <>
-          <h3 className="font-bold text-foreground text-sm 
-                  leading-4 tracking-tighter uppercase">
-            {drink.method?.name}
+          <h3 className="font-bold text-muted-foreground text-sm 
+                  leading-4 mb-2 text-center">
+            {drink.method?.name || drink.customMethod || ''}
           </h3>
-          <ul className="flex flex-wrap justify-center text-foreground gap-4"
+          <ul className="w-full flex flex-wrap justify-center 
+                          text-foreground gap-4"
             onClick={changeIngredientUnit}>
             {drink && adjustedIngredients?.map((ingredient, index) => (
               <li key={index} className="flex flex-col text-center 
@@ -56,7 +57,8 @@ const IngredientFooter = ({ drink }: { drink?: drinkSchemaOutput }) => {
                 <AnimatePresence>
                   <div className="flex flex-col items-center justify-end">
                     {ingredient.amount && <motion.span
-                      className="text-2xl leading-8 font-light mb-1 select-none"
+                      className="text-3xl leading-8 font-normal 
+                                mb-1 select-none"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
@@ -80,6 +82,13 @@ const IngredientFooter = ({ drink }: { drink?: drinkSchemaOutput }) => {
               </li>
             ))}
           </ul>
+          {drink.garnishingInstructions?.map((instruction, index) => (
+            <h3 key={index} className="font-bold text-muted-foreground text-sm 
+                  leading-4 mt-2 text-center">
+              {instruction}
+            </h3>
+          )
+          )}
         </>}
     </section>
   );
