@@ -18,7 +18,7 @@ export default function Home() {
         src={LogoImage}
         alt={constants.productTitle}
         priority
-        className='z-10 -mt-8  lg:mt-0
+        className='z-10 -mt-8
         sm:w-72 md:w-80 lg:w-96 h-40 mb-6'
       />
       <DrinkMaker drink={drink} showShadow={true} />
