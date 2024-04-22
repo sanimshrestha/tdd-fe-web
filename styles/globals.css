@@ -121,8 +121,12 @@ main {
     opacity: 0;
   }
 }
+.comingsoon-container .drinkmaker{
+  align-self: center !important;
+  margin-top: 0 !important;
+}
 
 /* Not working in local so hard adding */
-/* .__variable_866216 {
+.__variable_866216 {
   --font-sans: "__Lexend_866216", "__Lexend_Fallback_866216";
-} */
+}
