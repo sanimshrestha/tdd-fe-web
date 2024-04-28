@@ -3,6 +3,7 @@ import useScreenSize from "@/lib/hooks/useScreenSize";
 import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { getIngredientHeightByVolume } from "../Glass/utils";
 
 interface DrinkStackProps {
   ingredients: drinkSchemaOutput["ingredients"];
@@ -12,7 +13,6 @@ interface DrinkStackProps {
 
 const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
   const {
-    drinkPaddingPercent = 25,
     drinkContainerHeightPercent = 100,
     ingredientGap = 2,
     strokeWidth = 2 } = glass;
@@ -61,17 +61,7 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
     }
   }, [glass]);
 
-  const totalIngredientParts = ingredients.reduce((acc, curr) => {
-    return acc + curr.parts;
-  }, 0);
-
-  const adjustedIngredients = ingredients.map((ingredient) => {
-    return {
-      ...ingredient,
-      parts: (ingredient.parts / totalIngredientParts)
-        * (100 - drinkPaddingPercent)
-    }
-  });
+  const adjustedIngredients = getIngredientHeightByVolume(glass, ingredients);
 
   // Framer motion variants for the drinks stack
   const container = {
@@ -113,7 +103,7 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
               key={ingredient.name}
               className="bg-transparent relative"
               style={{
-                height: ingredient.parts + "%"
+                height: ingredient.height + "%"
               }}
               title={ingredient.name}>
               <div
