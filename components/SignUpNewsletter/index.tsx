@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import signUptoNewsLetter from "@server/newsletter";
+import SubmitButton from "../ui/submitButton";
 
 
 export enum Status {
@@ -44,7 +45,7 @@ const buttonText = {
   [Status.Duplicate]: "Use another email",
 }
 
-const MotionButton = motion(Button)
+const MotionSubmitButton = motion(SubmitButton)
 const MotionInput = motion(Input)
 
 
@@ -97,14 +98,13 @@ const SignUpNewsletter = () => {
         </motion.div>
 
         {state.status !== Status.Success &&
-          // <PrimaryButton text={buttonText[state.status]} type="submit" />
-          <MotionButton
+          <MotionSubmitButton
             layout
             className="w-full"
             type="submit"
           >
             {buttonText[state.status]}
-          </MotionButton>
+          </MotionSubmitButton>
         }
       </motion.form>
     </div>

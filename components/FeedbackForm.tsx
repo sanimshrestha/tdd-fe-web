@@ -28,6 +28,7 @@ import { useAppDispatch, useAppSelector } from "@redux/hooks"
 import { setFeedbackDialogOpen, uiState } from "@redux/features/ui"
 import { useToast } from "./ui/use-toast"
 import MessageSmileSquare from "@icons/MessageSmileSquare"
+import SubmitButton from "./ui/submitButton"
 
 export function FeedbackForm({ children }: { children?: React.ReactNode }) {
   const [createFeedback] = useCreateFeedbackMutation();
@@ -75,6 +76,7 @@ export function FeedbackForm({ children }: { children?: React.ReactNode }) {
         title: "Feedback sent successfully",
         variant: "success"
       })
+      dispatch(setFeedbackDialogOpen(false))
       form.reset()
     } catch (error) {
       toast({
@@ -206,9 +208,13 @@ export function FeedbackForm({ children }: { children?: React.ReactNode }) {
             </span>
             <div className="col-span-2 flex sm:grid 
                             sm:grid-cols-2 items-center gap-4">
-              <Button type="submit" className="w-fit ml-auto">
+              <SubmitButton
+                type="submit"
+                className="w-fit ml-auto"
+                disabled={form.formState.isSubmitting}
+              >
                 Send Feedback
-              </Button>
+              </SubmitButton>
               <DialogClose asChild>
                 <Button
                   type="button"
