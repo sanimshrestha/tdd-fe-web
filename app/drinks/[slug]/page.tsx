@@ -1,4 +1,5 @@
 'use client'
+import useKeyDown from "@/lib/hooks/useKeyDown";
 import { setCurrentDrink } from "@/redux/features/drinks";
 import DrinkMaker from "@components/DrinkMaker/DrinkMaker";
 import IngredientFooter from "@components/IngredientFooter";
@@ -19,6 +20,14 @@ const Drink = ({ params }: { params: { slug: string } }) => {
 
   const { toast } = useToast()
   const dispatch = useAppDispatch()
+
+  useKeyDown(() => {
+    if (prevDrink) window.location.href = `/drinks/${prevDrink.slug}`;
+  }, ['ArrowLeft'])
+
+  useKeyDown(() => {
+    if (nextDrink) window.location.href = `/drinks/${nextDrink.slug}`;
+  }, ['ArrowRight'])
 
   useEffect(() => {
     if (!drink) return;
@@ -72,12 +81,12 @@ const Drink = ({ params }: { params: { slug: string } }) => {
             </>
             : drink && (
               <>
-                <h2 className="font-bold text-foreground mt-4 text-xl 
-                      leading-5 tracking-tighter">
+                <h2 className="font-bold text-foreground mt-4 text-2xl 
+                      leading-5">
                   {drink?.name}
                 </h2>
-                <p className="text-muted-foreground text-base 
-                              leading-5 tracking-tight">
+                <p className="text-muted-foreground text-base mt-1
+                              mb-2 leading-5">
                   {drink?.drinkCategory?.name}
                 </p>
                 <Button

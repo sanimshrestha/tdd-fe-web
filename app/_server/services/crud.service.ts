@@ -93,7 +93,6 @@ export async function findItemWithPrevNext<T extends Document>(
     { [sortField]: { $lt: currentItem[sortField] } } as FilterQuery<T>
     const nextQuery = 
     { [sortField]: { $gt: currentItem[sortField] } } as FilterQuery<T>
-    console.log(currentItem)
     currentItem = outputSchema.parse(currentItem);
     if(!currentItem){
       return NextResponse.json(
