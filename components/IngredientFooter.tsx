@@ -3,17 +3,24 @@ import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { useAppSelector } from "@/redux/hooks";
+import { uiState } from "@/redux/features/ui";
 
 
 const IngredientFooter = ({ drink }: { drink?: drinkSchemaOutput }) => {
   const [selectedAmtUnitIdx, setamtUnitIdx] = useState<number>(0);
+  const hoveredIngredient = useAppSelector<uiState['hoveredIngredient']>
+    ((state) => state.ui.hoveredIngredient);
+
 
   const adjustedIngredients = drink
     ? drink.ingredients?.map((ingredient) => {
       return {
         ...ingredient,
         amount: [ingredient.parts, ...ingredient.amount || []],
-        unit: [ingredient.parts > 1 ? "parts" : "part",
+        unit: [ingredient.parts > 1
+          ? ingredient.ingredientStyle.units
+          : ingredient.ingredientStyle.unit,
         ...ingredient.unit || []],
       };
     })
@@ -30,7 +37,7 @@ const IngredientFooter = ({ drink }: { drink?: drinkSchemaOutput }) => {
 
   return (
     <section className="flex flex-col justify-center items-center z-10 
-                        m-4 lg:self-start lg:mx-8 lg:mt-16 gap-4 w-fit"
+                        m-4 lg:self-start lg:mx-8 lg:mt-10 gap-4 w-fit"
       style={{
         gridArea: "ingredients",
       }} >
@@ -52,8 +59,13 @@ const IngredientFooter = ({ drink }: { drink?: drinkSchemaOutput }) => {
                           text-foreground gap-4"
             onClick={changeIngredientUnit}>
             {drink && adjustedIngredients?.map((ingredient, index) => (
-              <li key={index} className="flex flex-col text-center 
-                                          basis-1/3-pad-2 grow-0 shrink-0">
+              <li key={index}
+                className={`flex flex-col text-center 
+                  basis-1/3-pad-2 grow-0 shrink-0 transition-transform
+                  ease-in-out duration-200
+                  ${(hoveredIngredient === ingredient.name)
+                    ? 'scale-110 textShadow-glow'
+                    : 'scale-100'}`}>
                 <AnimatePresence>
                   <div className="flex flex-col items-center justify-end">
                     {ingredient.amount && <motion.span
@@ -67,7 +79,7 @@ const IngredientFooter = ({ drink }: { drink?: drinkSchemaOutput }) => {
                     </motion.span>}
                     {ingredient.unit && <motion.span
                       className="text-sm text-muted-foreground
-                              font-light mb-1 select-none"
+                              font-light mb-1 select-none textShadow-none"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}

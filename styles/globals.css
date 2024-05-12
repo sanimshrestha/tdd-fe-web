@@ -126,7 +126,15 @@ main {
   margin-top: 0 !important;
 }
 
-/* Not working in local so hard adding */
-.__variable_866216 {
-  --font-sans: "__Lexend_866216", "__Lexend_Fallback_866216";
+/* glow text css */
+.textShadow-glow {
+  text-shadow:0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.5);
 }
+.textShadow-none {
+  text-shadow: none
+}
+
+/* Not working in local so hard adding */
+/* .__variable_866216 {
+  --font-sans: "__Lexend_866216", "__Lexend_Fallback_866216";
+} */
