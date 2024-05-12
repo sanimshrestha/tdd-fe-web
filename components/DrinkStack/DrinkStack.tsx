@@ -1,5 +1,8 @@
 'use client';
 import useScreenSize from "@/lib/hooks/useScreenSize";
+import { useAppDispatch } from "@/redux/hooks";
+import { clearHoveredIngredient, setHoveredIngredient }
+  from "@redux/features/ui";
 import { drinkSchemaOutput } from "@server/schema/drink.schema";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -22,6 +25,8 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
     bottomGap = 2, } = glass;
   const [blur, setblur] = useState(12);
   const [glassFillAspect, setglassFillAspect] = useState("1 / 1");
+
+  const dispatch = useAppDispatch();
 
   const screenSize = useScreenSize();
 
@@ -88,7 +93,13 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
         animate={"show"}
         style={{ height: drinkContainerHeightPercent + "%", }}
       >
-        <div className="absolute flex flex-col justify-end"
+        <div
+          className={`absolute flex flex-col justify-end  \
+                        ${isBackground ? "pointer-events-none" : ""}
+                        `}
+          onMouseLeave={() => {
+            dispatch(clearHoveredIngredient())
+          }}
           style={{
             clipPath: `url(#${glass.name.toLowerCase()}-mask)`,
             left: `${sideGap + strokeWidth + leftPadding}px`,
@@ -101,11 +112,15 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
           {adjustedIngredients.map((ingredient) => (
             <div
               key={ingredient.name}
-              className="bg-transparent relative"
+              className={`bg-transparent relative  \ 
+              ${isBackground ? "pointer-events-none" : ""}`}
               style={{
                 height: ingredient.height + "%"
               }}
-              title={ingredient.name}>
+              title={ingredient.name}
+              onMouseOver={() =>
+                dispatch(setHoveredIngredient(ingredient.name))}
+            >
               <div
                 className="absolute bottom-0 left-0 w-full h-full"
                 style={{

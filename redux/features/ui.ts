@@ -9,12 +9,14 @@ export type uiState = {
   }[];
   feedbackDialogOpen: boolean;
   commandDialogOpen: boolean;
+  hoveredIngredient?: string;
 };
 
 const initialState: uiState = {
   recentDrinks: [],
   feedbackDialogOpen: false,
   commandDialogOpen: false,
+  hoveredIngredient: undefined,
 };
 
 export const uiSlice = createSlice({
@@ -26,6 +28,12 @@ export const uiSlice = createSlice({
     },
     setCommandDialogOpen: (state, action: PayloadAction<boolean>) => {
       state.commandDialogOpen = action.payload;
+    },
+    setHoveredIngredient: (state, action: PayloadAction<string>) => {
+      state.hoveredIngredient = action.payload;
+    },
+    clearHoveredIngredient: (state) => {
+      state.hoveredIngredient = undefined;
     },
   },
   extraReducers(builder) {
@@ -51,5 +59,7 @@ export const uiSlice = createSlice({
 });
 export const { 
   setFeedbackDialogOpen, 
-  setCommandDialogOpen } = uiSlice.actions;
+  setCommandDialogOpen,
+  setHoveredIngredient,
+  clearHoveredIngredient } = uiSlice.actions;
 export default uiSlice.reducer;
