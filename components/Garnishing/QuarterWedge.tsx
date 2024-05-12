@@ -45,7 +45,7 @@ const QuarterWedge = (props: GarnishingProps) => {
   return (
     <motion.div
       style={{ top: `${topPos}%`, left: `${leftPos}%` }}
-      className="absolute pointer-events-none w-[24.6%]" //124/504 = 24.6%
+      className="absolute pointer-events-none w-[24.6%] z-10" //124/504 = 24.6%
     >
       <div
         style={{
