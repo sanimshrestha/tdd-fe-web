@@ -1,7 +1,12 @@
 import z, { array, object } from "zod";
 import { ObjectIdNameSchema } from "./common.schema";
 
-export const IngredientStyleSchema = ObjectIdNameSchema;
+export const IngredientStyleSchema = ObjectIdNameSchema.merge(
+  object({
+    unit: z.string().optional(),
+    units: z.string().optional(),
+  })
+);
 
 export const ingredientStyleSchemaOutput = IngredientStyleSchema;
 

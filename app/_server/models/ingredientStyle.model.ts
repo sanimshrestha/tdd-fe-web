@@ -3,6 +3,8 @@ import mongoose, { InferSchemaType, Schema } from "mongoose";
 const IngredientStyleSchema = new Schema(
   {
     name: { type: String, required: true },
+    unit: { type: String },
+    units: { type: String },
   }
 );
 
