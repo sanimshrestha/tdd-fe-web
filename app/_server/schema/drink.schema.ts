@@ -19,7 +19,7 @@ const DrinkIngredientInputSchema = object({
     required_error: "Ingredient parts is required",
   }),
   ingredientStyle: ObjectIdSchema.shape._id,
-  amount: array(number()).optional(),
+  amount: array(string()).optional(),
   unit: array(string()).optional(),
 });
 

@@ -29,7 +29,7 @@ const DrinkSchema = new Schema(
         ingredientStyle: { 
           type: Schema.Types.ObjectId, 
           ref: "IngredientStyle" },
-        amount: [Number],
+        amount: [String],
         unit: [String],
       },
     ],
