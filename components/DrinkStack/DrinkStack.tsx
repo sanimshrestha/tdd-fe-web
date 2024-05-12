@@ -95,7 +95,7 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
       >
         <div
           className={`absolute flex flex-col justify-end  \
-                        ${isBackground ? "pointer-events-none" : ""}
+                    ${(isBackground || !animate) ? "pointer-events-none" : ""}
                         `}
           onMouseLeave={() => {
             dispatch(clearHoveredIngredient())
@@ -113,13 +113,14 @@ const DrinkStack = ({ ingredients, glass, animate }: DrinkStackProps) => {
             <div
               key={ingredient.name}
               className={`bg-transparent relative  \ 
-              ${isBackground ? "pointer-events-none" : ""}`}
+              ${(isBackground || !animate) ? "pointer-events-none" : ""}`}
               style={{
                 height: ingredient.height + "%"
               }}
               title={ingredient.name}
               onMouseOver={() =>
-                dispatch(setHoveredIngredient(ingredient.name))}
+                dispatch(setHoveredIngredient(ingredient.name))
+              }
             >
               <div
                 className="absolute bottom-0 left-0 w-full h-full"
